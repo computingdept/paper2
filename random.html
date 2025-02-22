@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Random Numbers Trace Table Challenges</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 1em;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input {
+      width: 90%;
+      padding: 4px;
+      text-align: center;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+    .flex-container {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .content {
+      flex: 1;
+    }
+    .diagram {
+      flex: 0 0 300px;
+      border: 1px solid #000;
+      padding: 10px;
+      background: #f9f9f9;
+      font-family: monospace;
+      white-space: pre;
+    }
+  </style>
+  <script>
+    /* For each question, we assume the following fixed random returns:
+       Q1: random(1,6) returns 4
+       Q2: random(-1.0,10.0) returns 3.7
+       Q3: random(50,100) returns 85
+       Q4: random(1,3) returns 2
+       Q5: random(1,5) returns 3
+       Q6: random(1,6) returns 5
+       Q7: random(5,20) returns 12
+       Q8: random(-5.0,35.0) returns 22.3
+       Q9: random(1,4) returns 3
+       Q10: For die1 random(1,6) returns 2 and for die2 random(1,6) returns 5
+    */
+
+    /* In these challenges the trace tables have two columns:
+       "Line Number" (pre-filled) and "Value" where you type in only the variable’s value or output.
+    */
+
+    function checkAnswersQ1() {
+      // Q1: Dice Roll Simulation
+      // Expected:
+      // Line 01: 4
+      // Line 02: You rolled 4
+      const correctValues = [
+        "4",
+        "You rolled 4"
+      ];
+      const rows = document.getElementById("traceTableQ1").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ2() {
+      // Q2: Random Real Number
+      // Expected:
+      // Line 01: 3.7
+      // Line 02: x is 3.7
+      const correctValues = [
+        "3.7",
+        "x is 3.7"
+      ];
+      const rows = document.getElementById("traceTableQ2").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ3() {
+      // Q3: Random Score Update
+      // Expected:
+      // Line 01: 85
+      // Line 03: 90
+      // Line 04: Total score: 90
+      const correctValues = [
+        "85",
+        "90",
+        "Total score: 90"
+      ];
+      const rows = document.getElementById("traceTableQ3").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ4() {
+      // Q4: Fruit Selector
+      // Expected:
+      // Line 01: 2
+      // Line 05: banana
+      // Line 09: You got banana
+      const correctValues = [
+        "2",
+        "banana",
+        "You got banana"
+      ];
+      const rows = document.getElementById("traceTableQ4").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ5() {
+      // Q5: Random Loop Iteration
+      // Expected:
+      // Line 02: 3
+      // Line 04 (Iteration 1): Iteration 1
+      // Line 04 (Iteration 2): Iteration 2
+      // Line 04 (Iteration 3): Iteration 3
+      // Line 07: Loop finished after 3 iterations
+      const correctValues = [
+        "3",
+        "Iteration 1",
+        "Iteration 2",
+        "Iteration 3",
+        "Loop finished after 3 iterations"
+      ];
+      const rows = document.getElementById("traceTableQ5").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ6() {
+      // Q6: Die Roll Game
+      // Expected:
+      // Line 01: 5
+      // Line 03: win
+      // Line 07: You win with a roll of 5
+      const correctValues = [
+        "5",
+        "win",
+        "You win with a roll of 5"
+      ];
+      const rows = document.getElementById("traceTableQ6").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ7() {
+      // Q7: Random Discount
+      // Expected:
+      // Line 01: 12
+      // Line 02: Discount is 12%
+      const correctValues = [
+        "12",
+        "Discount is 12%"
+      ];
+      const rows = document.getElementById("traceTableQ7").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ8() {
+      // Q8: Temperature Reading
+      // Expected:
+      // Line 01: 22.3
+      // Line 02: Today's temperature is 22.3°C
+      const correctValues = [
+        "22.3",
+        "Today's temperature is 22.3°C"
+      ];
+      const rows = document.getElementById("traceTableQ8").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ9() {
+      // Q9: Random Student Selector
+      // Expected:
+      // Line 01: 3
+      // Line 07: Charlie
+      // Line 11: Selected student: Charlie
+      const correctValues = [
+        "3",
+        "Charlie",
+        "Selected student: Charlie"
+      ];
+      const rows = document.getElementById("traceTableQ9").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+    
+    function checkAnswersQ10() {
+      // Q10: Sum of Two Dice Rolls
+      // Expected:
+      // Line 01: 2
+      // Line 02: 5
+      // Line 03: 7
+      // Line 04: Sum of dice: 7
+      const correctValues = [
+        "2",
+        "5",
+        "7",
+        "Sum of dice: 7"
+      ];
+      const rows = document.getElementById("traceTableQ10").rows;
+      for (let i = 1; i < rows.length; i++){
+        const input = rows[i].cells[1].getElementsByTagName("input")[0];
+        input.style.backgroundColor = (input.value.trim() === correctValues[i-1]) ? "lightgreen" : "lightcoral";
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Random Numbers Trace Table Challenges</h1>
+  <p>
+    Each challenge uses a random number function. Complete the trace table by entering only the value for each line.
+    (For example, if the code assigns “roll = random(1,6)” and the random number is 4, simply enter “4”.)
+  </p>
+  
+  <hr>
+  
+  <!-- Q1 -->
+  <section id="q1">
+    <h2>Q1: Dice Roll Simulation</h2>
+    <p><strong>Scenario:</strong> A school security system simulates a dice roll to generate a code.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 roll = random(1,6)
+02 print("You rolled " + roll)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ1">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (roll)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>02 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ1()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q2 -->
+  <section id="q2">
+    <h2>Q2: Random Real Number</h2>
+    <p><strong>Scenario:</strong> A science experiment records a random temperature reading.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 x = random(-1.0,10.0)
+02 print("x is " + x)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ2">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (x)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>02 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ2()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q3 -->
+  <section id="q3">
+    <h2>Q3: Random Score Update</h2>
+    <p><strong>Scenario:</strong> A teacher calculates a student's total score by generating a random base score and then adding a bonus.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 score = random(50,100)
+02 bonus = 5
+03 total = score + bonus
+04 print("Total score: " + total)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ3">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (score)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>03 (total)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>04 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ3()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q4 -->
+  <section id="q4">
+    <h2>Q4: Fruit Selector</h2>
+    <p><strong>Scenario:</strong> A school cafeteria randomly selects a fruit from a list (1=apple, 2=banana, 3=cherry) and prints it.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 choice = random(1,3)
+02 if choice = 1 then
+03    fruit = "apple"
+04 elseif choice = 2 then
+05    fruit = "banana"
+06 else
+07    fruit = "cherry"
+08 endif
+09 print("You got " + fruit)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ4">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (choice)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>05 (fruit)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>09 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ4()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q5 -->
+  <section id="q5">
+    <h2>Q5: Loop Iteration Count</h2>
+    <p><strong>Scenario:</strong> A simulation runs a loop a random number of times and prints the iteration count each time, then reports the total number of iterations.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 count = 0
+02 n = random(1,5)
+03 do
+04    count = count + 1
+05    print("Iteration " + count)
+06 while (count < n)
+07 print("Loop finished after " + count + " iterations")
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ5">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>02 (n)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>04 (Iteration 1)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>04 (Iteration 2)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>04 (Iteration 3)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>07 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ5()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q6 -->
+  <section id="q6">
+    <h2>Q6: Die Roll Game</h2>
+    <p><strong>Scenario:</strong> In a classroom game, a die is rolled. If the value is 4 or higher the student wins.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 die = random(1,6)
+02 if die >= 4 then
+03    result = "win"
+04 else
+05    result = "lose"
+06 endif
+07 print("You " + result + " with a roll of " + die)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ6">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (die)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>03 (result)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>07 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ6()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q7 -->
+  <section id="q7">
+    <h2>Q7: Random Discount</h2>
+    <p><strong>Scenario:</strong> A school store gives a random discount percentage (between 5% and 20%).</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 discount = random(5,20)
+02 print("Discount is " + discount + "%")
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ7">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (discount)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>02 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ7()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q8 -->
+  <section id="q8">
+    <h2>Q8: Temperature Reading</h2>
+    <p><strong>Scenario:</strong> A school weather station measures temperature by generating a random real number.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 temperature = random(-5.0,35.0)
+02 print("Today's temperature is " + temperature + "°C")
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ8">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (temperature)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>02 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ8()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q9 -->
+  <section id="q9">
+    <h2>Q9: Random Student Selector</h2>
+    <p><strong>Scenario:</strong> A teacher randomly selects a student (1=Alice, 2=Bob, 3=Charlie, 4=Diana) to answer a question.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 student = random(1,4)
+02 if student = 1 then
+03    name = "Alice"
+04 elseif student = 2 then
+05    name = "Bob"
+06 elseif student = 3 then
+07    name = "Charlie"
+08 else
+09    name = "Diana"
+10 endif
+11 print("Selected student: " + name)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ9">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (student)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>07 (name)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>11 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ9()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q10 -->
+  <section id="q10">
+    <h2>Q10: Sum of Two Dice Rolls</h2>
+    <p><strong>Scenario:</strong> In a classroom game, two dice are rolled and their sum is calculated.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 die1 = random(1,6)
+02 die2 = random(1,6)
+03 sum = die1 + die2
+04 print("Sum of dice: " + sum)
+    </pre>
+    <p><strong>Trace Table:</strong></p>
+    <table id="traceTableQ10">
+      <tr>
+        <th>Line Number</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>01 (die1)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>02 (die2)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>03 (sum)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+      <tr>
+        <td>04 (Output)</td>
+        <td><input type="text" placeholder=""/></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ10()">Check Answers</button>
+  </section>
+  
+</body>
+</html>
+

@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>10 Switch-Case Trace Table Tasks</title>
+  <style>
+    /* Apple-like styling using system fonts and a modern, airy look */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 40px;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: #ddd;
+      margin: 40px 0;
+    }
+    h2 {
+      font-size: 1.6em;
+      line-height: 1.4;
+      margin-bottom: 15px;
+      color: #222;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      font-size: 0.95em;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #fafafa;
+      font-weight: 600;
+    }
+    input[type="text"] {
+      width: 90%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    /* ----------------------------
+       Task 1: Fruit Price Calculator
+       Scenario: The fruit is "banana" at a local stall.
+       Expected: price = 1.5; Output: "The price of the fruit is1.5"
+    ---------------------------- */
+    function checkAnswersTask1() {
+      let correctValues = [
+        ["01", "banana", "", ""],
+        ["07", "", "1.5", ""],
+        ["16", "", "", "The price of the fruit is1.5"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 2: Day of Week Calculator
+       Scenario: A day number "3" is entered.
+       Expected: day = "Wednesday"; Output: "The day isWednesday"
+    ---------------------------- */
+    function checkAnswersTask2() {
+      let correctValues = [
+        ["01", "3", "", ""],
+        ["10", "", "Wednesday", ""],
+        ["28", "", "", "The day isWednesday"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 3: Month Name Calculator
+       Scenario: A month number "7" is given.
+       Expected: month = "July"; Output: "The month isJuly"
+    ---------------------------- */
+    function checkAnswersTask3() {
+      let correctValues = [
+        ["01", "7", "", ""],
+        ["22", "", "July", ""],
+        ["43", "", "", "The month isJuly"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 4: Simple Calculator Using Switch-Case
+       Scenario: Inputs: num1 = "10", num2 = "5", op = "*" 
+       Expected: result = 50; Output: "The result is50"
+    ---------------------------- */
+    function checkAnswersTask4() {
+      let correctValues = [
+        ["01", "10", "", "", "", ""],
+        ["02", "", "5", "", "", ""],
+        ["03", "", "", "*", "", ""],
+        ["12", "", "", "", "50", ""],
+        ["21", "", "", "", "", "The result is50"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 5: Traffic Light Instruction
+       Scenario: The traffic light colour is "red".
+       Expected: instruction = "Stop"; Output: "Instruction:Stop"
+    ---------------------------- */
+    function checkAnswersTask5() {
+      let correctValues = [
+        ["01", "red", "", ""],
+        ["04", "", "Stop", ""],
+        ["16", "", "", "Instruction:Stop"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 6: Letter Grade Evaluator
+       Scenario: The letter grade entered is "B".
+       Expected: remark = "Good"; Output: "Remark:Good"
+    ---------------------------- */
+    function checkAnswersTask6() {
+      let correctValues = [
+        ["01", "B", "", ""],
+        ["07", "", "Good", ""],
+        ["22", "", "", "Remark:Good"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 7: Nested Switch-Case: Vehicle & Fuel Type
+       Scenario: Inputs: vehicle = "car", fuel = "electric"
+       Expected: info = "Car: Electric motor"; Output: "Vehicle Info:Car: Electric motor"
+    ---------------------------- */
+    function checkAnswersTask7() {
+      let correctValues = [
+        ["01", "car", "", "", ""],
+        ["02", "", "electric", "", ""],
+        ["13", "", "", "Car: Electric motor", ""],
+        ["40", "", "", "", "Vehicle Info:Car: Electric motor"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 8: Days in a Month (Grouping Cases)
+       Scenario: The month number is "4".
+       Expected: days = 30; Output: "Days:30"
+    ---------------------------- */
+    function checkAnswersTask8() {
+      let correctValues = [
+        ["01", "4", "", ""],
+        ["16", "", "30", ""],
+        ["25", "", "", "Days:30"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 9: Shape Name by Number of Sides
+       Scenario: The number of sides is "5".
+       Expected: shape = "Pentagon"; Output: "Shape:Pentagon"
+    ---------------------------- */
+    function checkAnswersTask9() {
+      let correctValues = [
+        ["01", "5", "", ""],
+        ["10", "", "Pentagon", ""],
+        ["31", "", "", "Shape:Pentagon"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    /* ----------------------------
+       Task 10: Restaurant Menu Ordering (Nested Switch-Case)
+       Scenario: dish = "pizza" and drinkSize = "large"
+       Expected: basePrice = 8, drinkPrice = 2, total = 10;
+                 Output: "Total cost is10"
+    ---------------------------- */
+    function checkAnswersTask10() {
+      let correctValues = [
+        ["01", "pizza", "", "", ""],
+        ["02", "", "large", "", ""],
+        ["08", "", "", "8", ""],
+        ["25", "", "", "2", ""],
+        ["31", "", "", "10", ""],
+        ["32", "", "", "", "Total cost is10"]
+      ];
+      let table = document.getElementById("selectionTraceTableTask10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Task 1: Fruit Price Calculator -->
+  <section id="task1">
+    <h2>Task 1: Fruit Price Calculator</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the fruit is <strong>banana</strong> at a local stall.
+    </p>
+    <pre>
+01 fruit = input("Enter fruit name")
+02 switch (fruit)
+03    case "apple":
+04       price = 2
+05       break
+06    case "banana":
+07       price = 1.5
+08       break
+09    case "orange":
+10       price = 2.5
+11       break
+12    default:
+13       price = 0
+14       break
+15 end switch
+16 print("The price of the fruit is" + price)
+    </pre>
+    <table id="selectionTraceTableTask1">
+      <tr>
+        <th>Line Number</th>
+        <th>fruit</th>
+        <th>price</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask1()">Check Answers</button>
+  </section>
+
+  <!-- Task 2: Day of Week Calculator -->
+  <section id="task2">
+    <h2>Task 2: Day of Week Calculator</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the day number is <strong>3</strong>.
+    </p>
+    <pre>
+01 num = input("Enter day number (1-7)")
+02 switch (num)
+03    case "1":
+04       day = "Monday"
+05       break
+06    case "2":
+07       day = "Tuesday"
+08       break
+09    case "3":
+10       day = "Wednesday"
+11       break
+12    case "4":
+13       day = "Thursday"
+14       break
+15    case "5":
+16       day = "Friday"
+17       break
+18    case "6":
+19       day = "Saturday"
+20       break
+21    case "7":
+22       day = "Sunday"
+23       break
+24    default:
+25       day = "Invalid"
+26       break
+27 end switch
+28 print("The day is" + day)
+    </pre>
+    <table id="selectionTraceTableTask2">
+      <tr>
+        <th>Line Number</th>
+        <th>num</th>
+        <th>day</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask2()">Check Answers</button>
+  </section>
+
+  <!-- Task 3: Month Name Calculator -->
+  <section id="task3">
+    <h2>Task 3: Month Name Calculator</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the month number is <strong>7</strong>.
+    </p>
+    <pre>
+01 monthNum = input("Enter month number (1-12)")
+02 switch (monthNum)
+03    case "1":
+04       month = "January"
+05       break
+06    case "2":
+07       month = "February"
+08       break
+09    case "3":
+10       month = "March"
+11       break
+12    case "4":
+13       month = "April"
+14       break
+15    case "5":
+16       month = "May"
+17       break
+18    case "6":
+19       month = "June"
+20       break
+21    case "7":
+22       month = "July"
+23       break
+24    case "8":
+25       month = "August"
+26       break
+27    case "9":
+28       month = "September"
+29       break
+30    case "10":
+31       month = "October"
+32       break
+33    case "11":
+34       month = "November"
+35       break
+36    case "12":
+37       month = "December"
+38       break
+39    default:
+40       month = "Invalid"
+41       break
+42 end switch
+43 print("The month is" + month)
+    </pre>
+    <table id="selectionTraceTableTask3">
+      <tr>
+        <th>Line Number</th>
+        <th>monthNum</th>
+        <th>month</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask3()">Check Answers</button>
+  </section>
+
+  <!-- Task 4: Simple Calculator Using Switch-Case -->
+  <section id="task4">
+    <h2>Task 4: Simple Calculator Using Switch-Case</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the inputs are: 
+      num1 = <strong>10</strong>, num2 = <strong>5</strong>, and op = <strong>"*"</strong>.
+    </p>
+    <pre>
+01 num1 = input("Enter first number")
+02 num2 = input("Enter second number")
+03 op = input("Enter operator (+, -, *, /)")
+04 switch (op)
+05    case "+":
+06       result = num1 + num2
+07       break
+08    case "-":
+09       result = num1 - num2
+10       break
+11    case "*":
+12       result = num1 * num2
+13       break
+14    case "/":
+15       result = num1 / num2
+16       break
+17    default:
+18       result = 0
+19       break
+20 end switch
+21 print("The result is" + result)
+    </pre>
+    <table id="selectionTraceTableTask4">
+      <tr>
+        <th>Line Number</th>
+        <th>num1</th>
+        <th>num2</th>
+        <th>op</th>
+        <th>result</th>
+        <th>Output</th>
+      </tr>
+      <!-- 5 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask4()">Check Answers</button>
+  </section>
+
+  <!-- Task 5: Traffic Light Instruction -->
+  <section id="task5">
+    <h2>Task 5: Traffic Light Instruction</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the traffic light colour is <strong>red</strong>.
+    </p>
+    <pre>
+01 color = input("Enter traffic light color")
+02 switch (color)
+03    case "red":
+04       instruction = "Stop"
+05       break
+06    case "yellow":
+07       instruction = "Caution"
+08       break
+09    case "green":
+10       instruction = "Go"
+11       break
+12    default:
+13       instruction = "Invalid color"
+14       break
+15 end switch
+16 print("Instruction:" + instruction)
+    </pre>
+    <table id="selectionTraceTableTask5">
+      <tr>
+        <th>Line Number</th>
+        <th>color</th>
+        <th>instruction</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask5()">Check Answers</button>
+  </section>
+
+  <!-- Task 6: Letter Grade Evaluator -->
+  <section id="task6">
+    <h2>Task 6: Letter Grade Evaluator</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the letter grade is <strong>B</strong>.
+    </p>
+    <pre>
+01 grade = input("Enter letter grade (A, B, C, D, F)")
+02 switch (grade)
+03    case "A":
+04       remark = "Excellent"
+05       break
+06    case "B":
+07       remark = "Good"
+08       break
+09    case "C":
+10       remark = "Fair"
+11       break
+12    case "D":
+13       remark = "Poor"
+14       break
+15    case "F":
+16       remark = "Fail"
+17       break
+18    default:
+19       remark = "Invalid"
+20       break
+21 end switch
+22 print("Remark:" + remark)
+    </pre>
+    <table id="selectionTraceTableTask6">
+      <tr>
+        <th>Line Number</th>
+        <th>grade</th>
+        <th>remark</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask6()">Check Answers</button>
+  </section>
+
+  <!-- Task 7: Vehicle & Fuel Type (Nested Switch-Case) -->
+  <section id="task7">
+    <h2>Task 7: Vehicle & Fuel Type</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the inputs are:
+      vehicle = <strong>car</strong> and fuel = <strong>electric</strong>.
+    </p>
+    <pre>
+01 vehicle = input("Enter vehicle type (car/truck)")
+02 fuel = input("Enter fuel type (gasoline/diesel/electric)")
+03 switch (vehicle)
+04    case "car":
+05       switch (fuel)
+06          case "gasoline":
+07             info = "Car: Gasoline engine"
+08             break
+09          case "diesel":
+10             info = "Car: Diesel engine"
+11             break
+12          case "electric":
+13             info = "Car: Electric motor"
+14             break
+15          default:
+16             info = "Car: Unknown fuel"
+17             break
+18       end switch
+19       break
+20    case "truck":
+21       switch (fuel)
+22          case "gasoline":
+23             info = "Truck: Gasoline engine"
+24             break
+25          case "diesel":
+26             info = "Truck: Diesel engine"
+27             break
+28          case "electric":
+29             info = "Truck: Electric motor"
+30             break
+31          default:
+32             info = "Truck: Unknown fuel"
+33             break
+34       end switch
+35       break
+36    default:
+37       info = "Unknown vehicle"
+38       break
+39 end switch
+40 print("Vehicle Info:" + info)
+    </pre>
+    <table id="selectionTraceTableTask7">
+      <tr>
+        <th>Line Number</th>
+        <th>vehicle</th>
+        <th>fuel</th>
+        <th>info</th>
+        <th>Output</th>
+      </tr>
+      <!-- 4 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask7()">Check Answers</button>
+  </section>
+
+  <!-- Task 8: Days in a Month (Grouping Cases) -->
+  <section id="task8">
+    <h2>Task 8: Days in a Month</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the month number is <strong>4</strong>.
+    </p>
+    <pre>
+01 monthNum = input("Enter month number (1-12)")
+02 switch (monthNum)
+03    case "1":
+04    case "3":
+05    case "5":
+06    case "7":
+07    case "8":
+08    case "10":
+09    case "12":
+10       days = 31
+11       break
+12    case "4":
+13    case "6":
+14    case "9":
+15    case "11":
+16       days = 30
+17       break
+18    case "2":
+19       days = 28
+20       break
+21    default:
+22       days = 0
+23       break
+24 end switch
+25 print("Days:" + days)
+    </pre>
+    <table id="selectionTraceTableTask8">
+      <tr>
+        <th>Line Number</th>
+        <th>monthNum</th>
+        <th>days</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask8()">Check Answers</button>
+  </section>
+
+  <!-- Task 9: Shape Name by Number of Sides -->
+  <section id="task9">
+    <h2>Task 9: Shape Name by Number of Sides</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the number of sides is <strong>5</strong>.
+    </p>
+    <pre>
+01 sides = input("Enter number of sides")
+02 switch (sides)
+03    case "3":
+04       shape = "Triangle"
+05       break
+06    case "4":
+07       shape = "Quadrilateral"
+08       break
+09    case "5":
+10       shape = "Pentagon"
+11       break
+12    case "6":
+13       shape = "Hexagon"
+14       break
+15    case "7":
+16       shape = "Heptagon"
+17       break
+18    case "8":
+19       shape = "Octagon"
+20       break
+21    case "9":
+22       shape = "Nonagon"
+23       break
+24    case "10":
+25       shape = "Decagon"
+26       break
+27    default:
+28       shape = "Unknown shape"
+29       break
+30 end switch
+31 print("Shape:" + shape)
+    </pre>
+    <table id="selectionTraceTableTask9">
+      <tr>
+        <th>Line Number</th>
+        <th>sides</th>
+        <th>shape</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask9()">Check Answers</button>
+  </section>
+
+  <!-- Task 10: Restaurant Menu Ordering -->
+  <section id="task10">
+    <h2>Task 10: Restaurant Menu Ordering</h2>
+    <p>
+      Complete the selection trace table for the algorithm when the inputs are:
+      dish = <strong>pizza</strong> and drink size = <strong>large</strong>.
+    </p>
+    <pre>
+01 dish = input("Enter dish (burger/pizza/salad)")
+02 drinkSize = input("Enter drink size (small/medium/large)")
+03 switch (dish)
+04    case "burger":
+05       basePrice = 5
+06       break
+07    case "pizza":
+08       basePrice = 8
+09       break
+10    case "salad":
+11       basePrice = 4
+12       break
+13    default:
+14       basePrice = 0
+15       break
+16 end switch
+17 switch (drinkSize)
+18    case "small":
+19       drinkPrice = 1
+20       break
+21    case "medium":
+22       drinkPrice = 1.5
+23       break
+24    case "large":
+25       drinkPrice = 2
+26       break
+27    default:
+28       drinkPrice = 0
+29       break
+30 end switch
+31 total = basePrice + drinkPrice
+32 print("Total cost is" + total)
+    </pre>
+    <table id="selectionTraceTableTask10">
+      <tr>
+        <th>Line Number</th>
+        <th>dish</th>
+        <th>drinkSize</th>
+        <th>price</th>
+        <th>Output</th>
+      </tr>
+      <!-- 6 data rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTask10()">Check Answers</button>
+  </section>
+</body>
+</html>

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Searching Algorithms Trace Table Challenges</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 1px;
+      background: #ddd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-size: 1em;
+      overflow-x: auto;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    /* Q1: Linear Search in a Names Array */
+    function checkAnswersQ1() {
+      // Pseudocode:
+      // 01 names = ["Bob", "Carol", "Alice", "David", "Eve"]
+      // 02 i = 0
+      // 03 while (i < 5)
+      // 04     if names[i] == "Alice" then
+      // 05         print("Found at index " + i)
+      // 06         break
+      // 07     endif
+      // 08     i = i + 1
+      // 09 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "names = Bob, Carol, Alice, David, Eve"
+      // Row 2 (Line 04): "i = 2, condition true"
+      // Row 3 (Line 05): "Found at index 2"
+      let correctValues = [
+        ["01", "names = Bob, Carol, Alice, David, Eve", ""],
+        ["04", "i = 2, condition true", ""],
+        ["05", "", "Found at index 2"]
+      ];
+      let table = document.getElementById("traceTableQ1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q2: Linear Search on Numbers (Found) */
+    function checkAnswersQ2() {
+      // Pseudocode:
+      // 01 numbers = [2,5,7,11,13]
+      // 02 i = 0
+      // 03 while (i < 5)
+      // 04     if numbers[i] == 7 then
+      // 05         print("Found 7 at index " + i)
+      // 06         break
+      // 07     endif
+      // 08     i = i + 1
+      // 09 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "numbers = 2,5,7,11,13"
+      // Row 2 (Line 04): "i = 2, condition true"
+      // Row 3 (Line 05): "Found 7 at index 2"
+      let correctValues = [
+        ["01", "numbers = 2,5,7,11,13", ""],
+        ["04", "i = 2, condition true", ""],
+        ["05", "", "Found 7 at index 2"]
+      ];
+      let table = document.getElementById("traceTableQ2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q3: Linear Search on Numbers (Not Found) */
+    function checkAnswersQ3() {
+      // Pseudocode:
+      // 01 numbers = [2,5,7,11,13]
+      // 02 i = 0
+      // 03 found = false
+      // 04 while (i < 5)
+      // 05     if numbers[i] == 20 then
+      // 06         found = true
+      // 07         print("Found 20 at index " + i)
+      // 08         break
+      // 09     endif
+      // 10     i = i + 1
+      // 11 endwhile
+      // 12 if found == false then
+      // 13     print("20 not found")
+      // 14 endif
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "numbers = 2,5,7,11,13"
+      // Row 2 (Line 11): "i reached 5"
+      // Row 3 (Line 13): "20 not found"
+      let correctValues = [
+        ["01", "numbers = 2,5,7,11,13", ""],
+        ["11", "i reached 5", ""],
+        ["13", "", "20 not found"]
+      ];
+      let table = document.getElementById("traceTableQ3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q4: Binary Search (Found) */
+    function checkAnswersQ4() {
+      // Pseudocode:
+      // 01 numbers = [2,5,7,11,13,17,19]
+      // 02 low = 0
+      // 03 high = 6
+      // 04 while (low <= high)
+      // 05     mid = (low + high) // 2
+      // 06     if numbers[mid] == 11 then
+      // 07         print("Found 11 at index " + mid)
+      // 08         break
+      // 09     elseif numbers[mid] < 11 then
+      // 10         low = mid + 1
+      // 11     else
+      // 12         high = mid - 1
+      // 13     endif
+      // 14 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "numbers = 2,5,7,11,13,17,19"
+      // Row 2 (Line 05): "mid = 3"  (since (0+6)//2 = 3)
+      // Row 3 (Line 06): "condition true" (numbers[3] is 11)
+      // Row 4 (Line 07): "Found 11 at index 3"
+      let correctValues = [
+        ["01", "numbers = 2,5,7,11,13,17,19", ""],
+        ["05", "mid = 3", ""],
+        ["06", "condition true", ""],
+        ["07", "", "Found 11 at index 3"]
+      ];
+      let table = document.getElementById("traceTableQ4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q5: Binary Search (Not Found) */
+    function checkAnswersQ5() {
+      // Pseudocode:
+      // 01 numbers = [2,5,7,11,13,17,19]
+      // 02 low = 0
+      // 03 high = 6
+      // 04 while (low <= high)
+      // 05     mid = (low + high) // 2
+      // 06     if numbers[mid] == 8 then
+      // 07         print("Found 8 at index " + mid)
+      // 08         break
+      // 09     elseif numbers[mid] < 8 then
+      // 10         low = mid + 1
+      // 11     else
+      // 12         high = mid - 1
+      // 13     endif
+      // 14 endwhile
+      // 15 if low > high then
+      // 16     print("8 not found")
+      // 17 endif
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "numbers = 2,5,7,11,13,17,19"
+      // Row 2 (Line 05): "mid = 3" (numbers[3] = 11, 11 > 8, so update high)
+      // Row 3 (Line 12): "high updated to 2"
+      // Row 4 (Next iteration, Line 05): "mid = 1" (numbers[1] = 5, 5 < 8, update low)
+      // Row 5 (Next iteration, Line 05): "mid = 2" (numbers[2] = 7, 7 < 8, update low to 3)
+      // Row 6 (Line 15): "low > high"
+      // Row 7 (Line 16): "8 not found"
+      let correctValues = [
+        ["01", "numbers = 2,5,7,11,13,17,19", ""],
+        ["05", "mid = 3", ""],
+        ["12", "high updated to 2", ""],
+        ["05", "mid = 1", ""],
+        ["05", "mid = 2", ""],
+        ["15", "low > high", ""],
+        ["16", "", "8 not found"]
+      ];
+      let table = document.getElementById("traceTableQ5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q6: Linear Search with Multiple Occurrences */
+    function checkAnswersQ6() {
+      // Pseudocode:
+      // 01 colours = ["red", "blue", "green", "blue", "yellow"]
+      // 02 i = 0
+      // 03 while (i < 5)
+      // 04     if colours[i] == "blue" then
+      // 05         print("Found blue at index " + i)
+      // 06         break
+      // 07     endif
+      // 08     i = i + 1
+      // 09 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "colours = red,blue,green,blue,yellow"
+      // Row 2 (Line 04): "i = 1, condition true"
+      // Row 3 (Line 05): "Found blue at index 1"
+      let correctValues = [
+        ["01", "colours = red,blue,green,blue,yellow", ""],
+        ["04", "i = 1, condition true", ""],
+        ["05", "", "Found blue at index 1"]
+      ];
+      let table = document.getElementById("traceTableQ6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q7: Binary Search on Sorted String Array */
+    function checkAnswersQ7() {
+      // Pseudocode:
+      // 01 words = ["apple","banana","cherry","date","fig","grape"]
+      // 02 low = 0
+      // 03 high = 5
+      // 04 while (low <= high)
+      // 05     mid = (low + high) // 2
+      // 06     if words[mid] == "date" then
+      // 07         print("Found date at index " + mid)
+      // 08         break
+      // 09     elseif words[mid] < "date" then
+      // 10         low = mid + 1
+      // 11     else
+      // 12         high = mid - 1
+      // 13     endif
+      // 14 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "words = apple,banana,cherry,date,fig,grape"
+      // Row 2 (Line 05): "mid = 2" (cherry)
+      // Row 3 (Line 10): "low updated to 3"
+      // Row 4 (Line 05): "mid = 4" (fig)
+      // Row 5 (Line 12): "high updated to 3"
+      // Row 6 (Line 05): "mid = 3" (date)
+      // Row 7 (Line 06): "condition true"
+      // Row 8 (Line 07): "Found date at index 3"
+      let correctValues = [
+        ["01", "words = apple,banana,cherry,date,fig,grape", ""],
+        ["05", "mid = 2", ""],
+        ["10", "low updated to 3", ""],
+        ["05", "mid = 4", ""],
+        ["12", "high updated to 3", ""],
+        ["05", "mid = 3", ""],
+        ["06", "condition true", ""],
+        ["07", "", "Found date at index 3"]
+      ];
+      let table = document.getElementById("traceTableQ7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q8: Linear Search on Letters */
+    function checkAnswersQ8() {
+      // Pseudocode:
+      // 01 letters = ["A","B","C","D","E","F"]
+      // 02 i = 0
+      // 03 while (i < 6)
+      // 04     if letters[i] == "E" then
+      // 05         print("Found E at index " + i)
+      // 06         break
+      // 07     endif
+      // 08     i = i + 1
+      // 09 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "letters = A,B,C,D,E,F"
+      // Row 2 (Line 04): "i = 4, condition true"
+      // Row 3 (Line 05): "Found E at index 4"
+      let correctValues = [
+        ["01", "letters = A,B,C,D,E,F", ""],
+        ["04", "i = 4, condition true", ""],
+        ["05", "", "Found E at index 4"]
+      ];
+      let table = document.getElementById("traceTableQ8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q9: Binary Search on a Larger Sorted Array */
+    function checkAnswersQ9() {
+      // Pseudocode:
+      // 01 numbers = [1,3,5,7,9,11,13,15,17,19]
+      // 02 low = 0
+      // 03 high = 9
+      // 04 while (low <= high)
+      // 05     mid = (low + high) // 2
+      // 06     if numbers[mid] == 15 then
+      // 07         print("Found 15 at index " + mid)
+      // 08         break
+      // 09     elseif numbers[mid] < 15 then
+      // 10         low = mid + 1
+      // 11     else
+      // 12         high = mid - 1
+      // 13     endif
+      // 14 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "numbers = 1,3,5,7,9,11,13,15,17,19"
+      // Row 2 (Line 05): "mid = 4" (numbers[4]=9)
+      // Row 3 (Line 10): "low updated to 5"
+      // Row 4 (Line 05): "mid = 7" (numbers[7]=15)
+      // Row 5 (Line 06): "condition true"
+      // Row 6 (Line 07): "Found 15 at index 7"
+      let correctValues = [
+        ["01", "numbers = 1,3,5,7,9,11,13,15,17,19", ""],
+        ["05", "mid = 4", ""],
+        ["10", "low updated to 5", ""],
+        ["05", "mid = 7", ""],
+        ["06", "condition true", ""],
+        ["07", "", "Found 15 at index 7"]
+      ];
+      let table = document.getElementById("traceTableQ9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q10: Binary Search with Target at the Beginning */
+    function checkAnswersQ10() {
+      // Pseudocode:
+      // 01 numbers = [1,4,7,10,13,16,19]
+      // 02 low = 0
+      // 03 high = 6
+      // 04 while (low <= high)
+      // 05     mid = (low + high) // 2
+      // 06     if numbers[mid] == 1 then
+      // 07         print("Found 1 at index " + mid)
+      // 08         break
+      // 09     elseif numbers[mid] < 1 then
+      // 10         low = mid + 1
+      // 11     else
+      // 12         high = mid - 1
+      // 13     endif
+      // 14 endwhile
+      //
+      // Expected trace:
+      // Row 1 (Line 01): "numbers = 1,4,7,10,13,16,19"
+      // Row 2 (Line 05): "mid = 3" (numbers[3]=10, so 10 > 1 → update high)
+      // Row 3 (Line 12): "high updated to 2"
+      // Row 4 (Line 05): "mid = 1" (numbers[1]=4, so 4 > 1 → update high)
+      // Row 5 (Line 12): "high updated to 0"
+      // Row 6 (Line 05): "mid = 0" (numbers[0]=1, condition true)
+      // Row 7 (Line 07): "Found 1 at index 0"
+      let correctValues = [
+        ["01", "numbers = 1,4,7,10,13,16,19", ""],
+        ["05", "mid = 3", ""],
+        ["12", "high updated to 2", ""],
+        ["05", "mid = 1", ""],
+        ["12", "high updated to 0", ""],
+        ["05", "mid = 0", ""],
+        ["06", "condition true", ""],
+        ["07", "", "Found 1 at index 0"]
+      ];
+      let table = document.getElementById("traceTableQ10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Standard Searching Algorithms Trace Table Challenges</h1>
+  <p>
+    Below are 10 trace table challenges based on standard searching algorithms (linear and binary search).
+    Each question displays pseudocode with line numbers and a scenario. In the trace table, enter the subprogram call
+    (for example, "procedure printName(Alice)" or "function squared(3)") along with key variable values and output.
+  </p>
+  
+  <hr>
+  
+  <!-- Q1: Linear Search in a Names Array -->
+  <section id="q1">
+    <h2>Q1: Linear Search – Find a Name</h2>
+    <p><strong>Scenario:</strong> In a classroom, an array of student names is stored as <code>["Bob", "Carol", "Alice", "David", "Eve"]</code>. A program searches for "Alice".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 names = ["Bob", "Carol", "Alice", "David", "Eve"]
+02 i = 0
+03 while (i < 5)
+04     if names[i] == "Alice" then
+05         print("Found at index " + i)
+06         break
+07     endif
+08     i = i + 1
+09 endwhile
+    </pre>
+    <table id="traceTableQ1">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ1()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q2: Linear Search on Numbers (Found) -->
+  <section id="q2">
+    <h2>Q2: Linear Search – Find a Number</h2>
+    <p><strong>Scenario:</strong> A student searches for the number 7 in the array <code>[2, 5, 7, 11, 13]</code>.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 numbers = [2,5,7,11,13]
+02 i = 0
+03 while (i < 5)
+04     if numbers[i] == 7 then
+05         print("Found 7 at index " + i)
+06         break
+07     endif
+08     i = i + 1
+09 endwhile
+    </pre>
+    <table id="traceTableQ2">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ2()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q3: Linear Search on Numbers (Not Found) -->
+  <section id="q3">
+    <h2>Q3: Linear Search – Number Not Found</h2>
+    <p><strong>Scenario:</strong> A student searches for the number 20 in the array <code>[2, 5, 7, 11, 13]</code> and fails to find it.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 numbers = [2,5,7,11,13]
+02 i = 0
+03 found = false
+04 while (i < 5)
+05     if numbers[i] == 20 then
+06         found = true
+07         print("Found 20 at index " + i)
+08         break
+09     endif
+10     i = i + 1
+11 endwhile
+12 if found == false then
+13     print("20 not found")
+14 endif
+    </pre>
+    <table id="traceTableQ3">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ3()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q4: Binary Search (Found) -->
+  <section id="q4">
+    <h2>Q4: Binary Search – Number Found</h2>
+    <p><strong>Scenario:</strong> A sorted array of numbers <code>[2,5,7,11,13,17,19]</code> is searched for 11 using binary search.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 numbers = [2,5,7,11,13,17,19]
+02 low = 0
+03 high = 6
+04 while (low <= high)
+05     mid = (low + high) // 2
+06     if numbers[mid] == 11 then
+07         print("Found 11 at index " + mid)
+08         break
+09     elseif numbers[mid] < 11 then
+10         low = mid + 1
+11     else
+12         high = mid - 1
+13     endif
+14 endwhile
+    </pre>
+    <table id="traceTableQ4">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ4()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q5: Binary Search (Not Found) -->
+  <section id="q5">
+    <h2>Q5: Binary Search – Number Not Found</h2>
+    <p><strong>Scenario:</strong> A student uses binary search on the sorted array <code>[2,5,7,11,13,17,19]</code> to search for 8, which is not present.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 numbers = [2,5,7,11,13,17,19]
+02 low = 0
+03 high = 6
+04 while (low <= high)
+05     mid = (low + high) // 2
+06     if numbers[mid] == 8 then
+07         print("Found 8 at index " + mid)
+08         break
+09     elseif numbers[mid] < 8 then
+10         low = mid + 1
+11     else
+12         high = mid - 1
+13     endif
+14 endwhile
+15 if low > high then
+16     print("8 not found")
+17 endif
+    </pre>
+    <table id="traceTableQ5">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ5()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q6: Linear Search with Multiple Occurrences -->
+  <section id="q6">
+    <h2>Q6: Linear Search – First Occurrence</h2>
+    <p><strong>Scenario:</strong> A student searches for "blue" in the colour array <code>["red", "blue", "green", "blue", "yellow"]</code> and should return the first occurrence at index 1.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 colours = ["red", "blue", "green", "blue", "yellow"]
+02 i = 0
+03 while (i < 5)
+04     if colours[i] == "blue" then
+05         print("Found blue at index " + i)
+06         break
+07     endif
+08     i = i + 1
+09 endwhile
+    </pre>
+    <table id="traceTableQ6">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ6()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q7: Binary Search on Sorted String Array -->
+  <section id="q7">
+    <h2>Q7: Binary Search – Find a Word</h2>
+    <p><strong>Scenario:</strong> A student uses binary search on a sorted array of words <code>["apple", "banana", "cherry", "date", "fig", "grape"]</code> to search for "date".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 words = ["apple","banana","cherry","date","fig","grape"]
+02 low = 0
+03 high = 5
+04 while (low <= high)
+05     mid = (low + high) // 2
+06     if words[mid] == "date" then
+07         print("Found date at index " + mid)
+08         break
+09     elseif words[mid] < "date" then
+10         low = mid + 1
+11     else
+12         high = mid - 1
+13     endif
+14 endwhile
+    </pre>
+    <table id="traceTableQ7">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ7()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q8: Linear Search on Letters -->
+  <section id="q8">
+    <h2>Q8: Linear Search – Find a Letter</h2>
+    <p><strong>Scenario:</strong> A student searches for the letter "E" in the array <code>["A", "B", "C", "D", "E", "F"]</code>.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 letters = ["A","B","C","D","E","F"]
+02 i = 0
+03 while (i < 6)
+04     if letters[i] == "E" then
+05         print("Found E at index " + i)
+06         break
+07     endif
+08     i = i + 1
+09 endwhile
+    </pre>
+    <table id="traceTableQ8">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ8()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q9: Binary Search on a Larger Sorted Array -->
+  <section id="q9">
+    <h2>Q9: Binary Search – Find a Number</h2>
+    <p><strong>Scenario:</strong> A student uses binary search on the sorted array <code>[1,3,5,7,9,11,13,15,17,19]</code> to search for 15.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 numbers = [1,3,5,7,9,11,13,15,17,19]
+02 low = 0
+03 high = 9
+04 while (low <= high)
+05     mid = (low + high) // 2
+06     if numbers[mid] == 15 then
+07         print("Found 15 at index " + mid)
+08         break
+09     elseif numbers[mid] < 15 then
+10         low = mid + 1
+11     else
+12         high = mid - 1
+13     endif
+14 endwhile
+    </pre>
+    <table id="traceTableQ9">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ9()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q10: Binary Search with Target at the Beginning -->
+  <section id="q10">
+    <h2>Q10: Binary Search – Target at Beginning</h2>
+    <p><strong>Scenario:</strong> A student uses binary search on the sorted array <code>[1,4,7,10,13,16,19]</code> to search for 1.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 numbers = [1,4,7,10,13,16,19]
+02 low = 0
+03 high = 6
+04 while (low <= high)
+05     mid = (low + high) // 2
+06     if numbers[mid] == 1 then
+07         print("Found 1 at index " + mid)
+08         break
+09     elseif numbers[mid] < 1 then
+10         low = mid + 1
+11     else
+12         high = mid - 1
+13     endif
+14 endwhile
+    </pre>
+    <table id="traceTableQ10">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ10()">Check Answers</button>
+  </section>
+  
+</body>
+</html>

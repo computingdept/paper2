@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>String Operations & Casting Trace Table Challenges</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 1px;
+      background: #ddd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-size: 1em;
+      overflow-x: auto;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    // ===============================
+    // ST1: String Length
+    // Scenario: A student is planning a project poster for her English class.
+    // Her course title "EnglishLiterature" is stored, and she needs to know its length.
+    // ===============================
+    function checkAnswersST1() {
+      let correctValues = [
+        ["01", "EnglishLiterature", "", ""],
+        ["02", "", "17", ""],
+        ["03", "", "", "Length is 17"]
+      ];
+      let table = document.getElementById("traceTableST1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST2: Substring Extraction
+    // Scenario: During a coding workshop, a student is asked to extract part of the course title "EnglishLiterature" 
+    // to use as a design element in a project.
+    // ===============================
+    function checkAnswersST2() {
+      let correctValues = [
+        ["01", "EnglishLiterature", "", ""],
+        ["02", "", "lish", ""],
+        ["03", "", "", "Substring is lish"]
+      ];
+      let table = document.getElementById("traceTableST2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST3: Left Substring
+    // Scenario: A student is creating a school logo abbreviation by taking the first four letters of "EnglishLiterature".
+    // ===============================
+    function checkAnswersST3() {
+      let correctValues = [
+        ["01", "EnglishLiterature", "", ""],
+        ["02", "", "Engl", ""],
+        ["03", "", "", "Left part is Engl"]
+      ];
+      let table = document.getElementById("traceTableST3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST4: Right Substring
+    // Scenario: For a school website banner, a student needs the last three letters of "EnglishLiterature" to form a stylish tagline.
+    // ===============================
+    function checkAnswersST4() {
+      let correctValues = [
+        ["01", "EnglishLiterature", "", ""],
+        ["02", "", "ure", ""],
+        ["03", "", "", "Right part is ure"]
+      ];
+      let table = document.getElementById("traceTableST4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST5: Concatenation of Two Strings
+    // Scenario: At the school assembly, the morning announcement is generated by concatenating a greeting with the word "class".
+    // ===============================
+    function checkAnswersST5() {
+      let correctValues = [
+        ["01", "Good morning, ", "", "", ""],
+        ["02", "", "class", "", ""],
+        ["03", "", "", "Good morning, class", ""],
+        ["04", "", "", "", "Good morning, class"]
+      ];
+      let table = document.getElementById("traceTableST5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST6: Concatenation with Literal
+    // Scenario: On the first day of term, the school welcomes a new student, Alex, with a personalized message.
+    // ===============================
+    function checkAnswersST6() {
+      let correctValues = [
+        ["01", "Alex", "", ""],
+        ["02", "", "Welcome, Alex", ""],
+        ["03", "", "", "Welcome, Alex"]
+      ];
+      let table = document.getElementById("traceTableST6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST7: Uppercase Conversion
+    // Scenario: A student is preparing content for the school website and needs to display the course title in uppercase.
+    // ===============================
+    function checkAnswersST7() {
+      let correctValues = [
+        ["01", "EnglishLiterature", "", ""],
+        ["02", "", "ENGLISHLITERATURE", ""],
+        ["03", "", "", "Uppercase: ENGLISHLITERATURE"]
+      ];
+      let table = document.getElementById("traceTableST7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST8: Lowercase Conversion
+    // Scenario: For a school newsletter, the course title "EnglishLiterature" must be displayed in lowercase.
+    // ===============================
+    function checkAnswersST8() {
+      let correctValues = [
+        ["01", "EnglishLiterature", "", ""],
+        ["02", "", "englishliterature", ""],
+        ["03", "", "", "Lowercase: englishliterature"]
+      ];
+      let table = document.getElementById("traceTableST8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST9: ASCII Conversion using ASC
+    // Scenario: In computer science class, a teacher asks students to find the ASCII value of the letter "A".
+    // ===============================
+    function checkAnswersST9() {
+      let correctValues = [
+        ["01", "A", "", ""],
+        ["02", "", "65", ""],
+        ["03", "", "", "ASCII of A is 65"]
+      ];
+      let table = document.getElementById("traceTableST9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    // ===============================
+    // ST10: CHR Conversion
+    // Scenario: A student is given the ASCII code 97 and must convert it to its corresponding character for a secret message project.
+    // ===============================
+    function checkAnswersST10() {
+      let correctValues = [
+        ["01", "97", "", ""],
+        ["02", "", "a", ""],
+        ["03", "", "", "Character for 97 is a"]
+      ];
+      let table = document.getElementById("traceTableST10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>String Operations & Casting Trace Table Challenges</h1>
+  <p>
+    These challenges involve various string operations and type‐casting tasks set in the context of an English high school.
+    Fill in the trace table only when a variable’s value changes or output is produced.
+  </p>
+
+  <hr>
+
+  <!-- ST1: String Length -->
+  <section id="st1">
+    <h2>ST1: String Length</h2>
+    <p><strong>Scenario:</strong> A student is preparing a project poster for their English class and needs to know the length of the course title "EnglishLiterature".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 subject = "EnglishLiterature"
+02 length = subject.length
+03 print("Length is " + length)
+    </pre>
+    <table id="traceTableST1">
+      <tr>
+        <th>Line Number</th>
+        <th>subject</th>
+        <th>length</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST1()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST2: Substring Extraction -->
+  <section id="st2">
+    <h2>ST2: Substring Extraction</h2>
+    <p><strong>Scenario:</strong> In a coding club, a student must extract a specific part of the course title "EnglishLiterature" to create a stylish design element.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 subject = "EnglishLiterature"
+02 subStr = subject.substring(3,7)
+03 print("Substring is " + subStr)
+    </pre>
+    <table id="traceTableST2">
+      <tr>
+        <th>Line Number</th>
+        <th>subject</th>
+        <th>subStr</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST2()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST3: Left Substring -->
+  <section id="st3">
+    <h2>ST3: Left Substring</h2>
+    <p><strong>Scenario:</strong> To design a new school logo, a student needs to obtain an abbreviation by extracting the first four letters of "EnglishLiterature".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 subject = "EnglishLiterature"
+02 leftPart = subject.left(4)
+03 print("Left part is " + leftPart)
+    </pre>
+    <table id="traceTableST3">
+      <tr>
+        <th>Line Number</th>
+        <th>subject</th>
+        <th>leftPart</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST3()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST4: Right Substring -->
+  <section id="st4">
+    <h2>ST4: Right Substring</h2>
+    <p><strong>Scenario:</strong> For a school website banner, a student extracts the last three letters of "EnglishLiterature" to use as a design flourish.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 subject = "EnglishLiterature"
+02 rightPart = subject.right(3)
+03 print("Right part is " + rightPart)
+    </pre>
+    <table id="traceTableST4">
+      <tr>
+        <th>Line Number</th>
+        <th>subject</th>
+        <th>rightPart</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST4()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST5: Concatenation of Two Strings -->
+  <section id="st5">
+    <h2>ST5: Concatenation of Two Strings</h2>
+    <p><strong>Scenario:</strong> During the morning assembly, the school speaker combines a greeting with the word "class" to announce the start of the day.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 stringA = "Good morning, "
+02 stringB = "class"
+03 result = stringA + stringB
+04 print(result)
+    </pre>
+    <table id="traceTableST5">
+      <tr>
+        <th>Line Number</th>
+        <th>stringA</th>
+        <th>stringB</th>
+        <th>result</th>
+        <th>Output</th>
+      </tr>
+      <!-- 4 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST5()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST6: Concatenation with Literal -->
+  <section id="st6">
+    <h2>ST6: Concatenation with Literal</h2>
+    <p><strong>Scenario:</strong> On the first day of term, a warm welcome message is created for a new student named Alex.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 name = "Alex"
+02 message = "Welcome, " + name
+03 print(message)
+    </pre>
+    <table id="traceTableST6">
+      <tr>
+        <th>Line Number</th>
+        <th>name</th>
+        <th>message</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST6()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST7: Uppercase Conversion -->
+  <section id="st7">
+    <h2>ST7: Uppercase Conversion</h2>
+    <p><strong>Scenario:</strong> For a school project, a student converts the course title "EnglishLiterature" into uppercase for display on the school website.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 subject = "EnglishLiterature"
+02 upperSubject = subject.upper
+03 print("Uppercase: " + upperSubject)
+    </pre>
+    <table id="traceTableST7">
+      <tr>
+        <th>Line Number</th>
+        <th>subject</th>
+        <th>upperSubject</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST7()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST8: Lowercase Conversion -->
+  <section id="st8">
+    <h2>ST8: Lowercase Conversion</h2>
+    <p><strong>Scenario:</strong> For the school newsletter, the course title "EnglishLiterature" is converted to lowercase.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 subject = "EnglishLiterature"
+02 lowerSubject = subject.lower
+03 print("Lowercase: " + lowerSubject)
+    </pre>
+    <table id="traceTableST8">
+      <tr>
+        <th>Line Number</th>
+        <th>subject</th>
+        <th>lowerSubject</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST8()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST9: ASCII Conversion using ASC -->
+  <section id="st9">
+    <h2>ST9: ASCII Conversion using ASC</h2>
+    <p><strong>Scenario:</strong> In a computer science class, a teacher asks students to find the ASCII value of the letter "A".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 ch = "A"
+02 asciiVal = ASC(ch)
+03 print("ASCII of A is " + asciiVal)
+    </pre>
+    <table id="traceTableST9">
+      <tr>
+        <th>Line Number</th>
+        <th>ch</th>
+        <th>asciiVal</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST9()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- ST10: CHR Conversion -->
+  <section id="st10">
+    <h2>ST10: CHR Conversion</h2>
+    <p><strong>Scenario:</strong> For a secret message project, a student converts the ASCII code 97 to its corresponding character.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 num = 97
+02 charVal = CHR(num)
+03 print("Character for 97 is " + charVal)
+    </pre>
+    <table id="traceTableST10">
+      <tr>
+        <th>Line Number</th>
+        <th>num</th>
+        <th>charVal</th>
+        <th>Output</th>
+      </tr>
+      <!-- 3 rows -->
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersST10()">Check Answers</button>
+  </section>
+
+  <hr>
+  
+  <!-- End of Challenges -->
+</body>
+</html>

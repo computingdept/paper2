@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RHSC Computing Department</title>
+  
+  <!-- Font Awesome (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnH1zajK9/WArqRyEl2K9CyyA3S+3HXw1j1fc8y40cB08Kfnb4R6+V/2gP09m9FhH7n0/j3Sw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* Reset and basic styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      /* Apple system font stack */
+      font-family: -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+    }
+
+    /* Main container to hold sidebar and content */
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      /* Light gradient background to give a subtle depth */
+      background: linear-gradient(to bottom, #F2F2F2, #E8E8E8);
+      width: 60px;               /* Collapsed width */
+      transition: width 0.3s;
+      overflow-x: hidden;
+      overflow-y: auto;
+      border-right: 1px solid #DDD;
+    }
+    /* Expand sidebar on hover */
+    .sidebar:hover {
+      width: 200px;              /* Expanded width */
+    }
+
+    /* Sidebar links */
+    .sidebar a {
+      display: flex;             /* so icon and text can be side-by-side */
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      padding: 15px;
+      border-bottom: 1px solid #DDD;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover {
+      background-color: #E0E0E0;
+      color: #000;
+    }
+
+    /* The icon itself */
+    .sidebar a i {
+      min-width: 20px;  /* ensures icon doesn't collapse */
+      text-align: center;
+      font-size: 18px;
+    }
+    /* The text label next to the icon */
+    .sidebar a span {
+      margin-left: 10px;
+      display: none;     /* Hide text in collapsed state */
+    }
+    /* On hover, show the text */
+    .sidebar:hover a span {
+      display: inline;
+    }
+
+    /* Content area (iframe container) */
+    .content {
+      flex: 1;
+      background: #fff;
+    }
+    /* The iframe itself should fill the content area */
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Example links with icons; replace icons/text with your own as desired -->
+      </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='sequence.html'">
+        <i class="fas fa-stream"></i>
+        <span>Sequence</span>
+      </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='ifthenelse.html'">
+        <i class="fas fa-code"></i>
+        <span>If Then Else</span>
+      </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='switchcase.html'">
+        <i class="fas fa-random"></i>
+        <span>Switch Case</span>
+      </a>
+         <a href="#" onclick="document.getElementById('myFrame').src='forloop.html'">
+        <i class="fas fa-sync-alt"></i>
+        <span>For Loop</span>
+      </a>
+          <a href="#" onclick="document.getElementById('myFrame').src='while.html'">
+        <i class="fas fa-arrow-circle-right"></i>
+        <span>While</span>
+      </a>
+      <a href="#" onclick="document.getElementById('myFrame').src='dowhile.html'">
+        <i class="fas fa-repeat"></i>
+        <span>Do While</span>
+      </a>
+    
+     <a href="#" onclick="document.getElementById('myFrame').src='strings.html'">
+        <i class="fas fa-font"></i>
+        <span>Strings</span>
+      </a>
+      <a href="#" onclick="document.getElementById('myFrame').src='1DArrays.html'">
+        <i class="fas fa-list-ul"></i>
+        <span>1D Arrays</span>
+      </a>
+      <a href="#" onclick="document.getElementById('myFrame').src='2DArrays.html'">
+        <i class="fas fa-table"></i>
+        <span>2D Arrays</span>
+      </a>
+      <a href="#" onclick="document.getElementById('myFrame').src='sub.html'">
+        <i class="fas fa-code"></i>
+        <span>Subprograms</span>
+      </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='filehandling.html'">
+        <i class="fas fa-code"></i>
+        <span>FileHandling</span>
+     
+         </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='searchLaB.html'">
+        <i class="fas fa-code"></i>
+        <span>Search (LaB)</span>
+      </a>
+       </a>
+         </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='sortbmi.html'">
+        <i class="fas fa-code"></i>
+        <span>Sorts (BMI)</span>
+      </a>
+       </a>
+      <a href="#" onclick="document.getElementById('myFrame').src='booleanlogic.html'">
+        <i class="fas fa-table"></i>
+        <span>Boolean Logic</span>
+      </a>
+     </a>
+         </a>
+        <a href="#" onclick="document.getElementById('myFrame').src='SQL.html'">
+        <i class="fas fa-code"></i>
+        <span>SQL</span>
+      </a>
+    </a>
+    
+  
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+      <!-- Iframe that displays the selected page -->
+      <iframe id="myFrame" src="arrays.html"></iframe>
+    </div>
+  </div>
+</body>
+</html>

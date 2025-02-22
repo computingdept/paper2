@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL Query Result Challenges</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    h2, h3 {
+      margin-top: 0;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 1px;
+      background: #ddd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-size: 1em;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+    .data-table {
+      margin-bottom: 20px;
+    }
+  </style>
+  <script>
+    /* Q1: Race Results – Select StudentID and TeamName for YearGroup 11 */
+    function checkAnswersQ1() {
+      // Expected result (2 rows):
+      // Row 1: 11GC1 , Valiants
+      // Row 2: 11JP2 , Champions
+      let correctValues = [
+        ["11GC1", "Valiants"],
+        ["11JP2", "Champions"]
+      ];
+      let table = document.getElementById("resultTableQ1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q2: Club Members – Select StudentID and Position for Chess Club */
+    function checkAnswersQ2() {
+      // Table: ClubMembers
+      // Data:
+      // 11AL1 | Chess Club | 2019 | President
+      // 10BM1 | Robotics   | 2020 | Member
+      // 11CN1 | Chess Club | 2019 | Secretary
+      // 10DR1 | Drama      | 2021 | Member
+      // Expected result (2 rows):
+      // Row 1: 11AL1 , President
+      // Row 2: 11CN1 , Secretary
+      let correctValues = [
+        ["11AL1", "President"],
+        ["11CN1", "Secretary"]
+      ];
+      let table = document.getElementById("resultTableQ2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q3: Test Scores – Select StudentID and Grade for Scores >= 90 */
+    function checkAnswersQ3() {
+      // Table: TestScores
+      // Data:
+      // 11EC1 | Math    | 85 | B
+      // 11EC2 | English | 92 | A
+      // 10SC1 | Science | 78 | C
+      // 10HS1 | History | 88 | B
+      // Expected result (1 row):
+      // Row 1: 11EC2 , A
+      let correctValues = [
+        ["11EC2", "A"]
+      ];
+      let table = document.getElementById("resultTableQ3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q4: Attendance – Select All Details for Absent Students */
+    function checkAnswersQ4() {
+      // Table: Attendance
+      // Data:
+      // 11ST1 | 2023-04-10 | Present
+      // 11ST2 | 2023-04-10 | Absent
+      // 10ST1 | 2023-04-10 | Present
+      // 10ST2 | 2023-04-10 | Present
+      // Expected result (1 row, all columns):
+      // Row 1: 11ST2 , 2023-04-10 , Absent
+      let correctValues = [
+        ["11ST2", "2023-04-10", "Absent"]
+      ];
+      let table = document.getElementById("resultTableQ4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q5: Library Books – Select Title for Books Available */
+    function checkAnswersQ5() {
+      // Table: LibraryBooks
+      // Data:
+      // B001 | 1984                    | Orwell      | Yes
+      // B002 | Hamlet                  | Shakespeare | No
+      // B003 | To Kill a Mockingbird   | Lee         | Yes
+      // B004 | The Hobbit              | Tolkien     | Yes
+      // Expected result (3 rows):
+      // Row 1: 1984
+      // Row 2: To Kill a Mockingbird
+      // Row 3: The Hobbit
+      let correctValues = [
+        ["1984"],
+        ["To Kill a Mockingbird"],
+        ["The Hobbit"]
+      ];
+      let table = document.getElementById("resultTableQ5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q6: Cafeteria Sales – Select Item and QuantitySold for Monday */
+    function checkAnswersQ6() {
+      // Table: CafeteriaSales
+      // Data:
+      // Sandwich | 4.5 | 30 | Monday
+      // Salad    | 3.0 | 20 | Monday
+      // Juice    | 2.0 | 25 | Tuesday
+      // Wrap     | 5.0 | 15 | Monday
+      // Expected result (3 rows):
+      // Row 1: Sandwich , 30
+      // Row 2: Salad    , 20
+      // Row 3: Wrap     , 15
+      let correctValues = [
+        ["Sandwich", "30"],
+        ["Salad", "20"],
+        ["Wrap", "15"]
+      ];
+      let table = document.getElementById("resultTableQ6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q7: Sports Teams – Show All Details Using the * Wildcard */
+    function checkAnswersQ7() {
+      // Table: SportsTeams
+      // Data:
+      // Valiants   | Mr. Smith    | 8  | 2
+      // Super-Team | Ms. Johnson  | 10 | 0
+      // Champions  | Mr. Lee      | 7  | 3
+      // Warriors   | Mrs. Brown   | 9  | 1
+      // Expected result (1 row, all 4 columns) for team 'Champions':
+      // Row 1: Champions , Mr. Lee , 7 , 3
+      let correctValues = [
+        ["Champions", "Mr. Lee", "7", "3"]
+      ];
+      let table = document.getElementById("resultTableQ7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q8: Student Projects – Select StudentID and YearGroup for Projects with Title LIKE '%Fair%' */
+    function checkAnswersQ8() {
+      // Table: StudentProjects
+      // Data:
+      // P001 | Science Fair       | Mr. White   | 11
+      // P002 | History Exhibit    | Ms. Green   | 10
+      // P003 | Art Installation   | Mrs. Black  | 11
+      // P004 | Robotics Challenge | Mr. Blue    | 10
+      // Expected result (1 row):
+      // Row 1: P001 , 11
+      let correctValues = [
+        ["P001", "11"]
+      ];
+      let table = document.getElementById("resultTableQ8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q9: Exam Results – Select StudentID and Exam for Grade 'A' */
+    function checkAnswersQ9() {
+      // Table: ExamResults
+      // Data:
+      // 11EX1 | Math    | 75 | C
+      // 11EX2 | English | 82 | B
+      // 10EX1 | Science | 68 | D
+      // 10EX2 | History | 90 | A
+      // Expected result (1 row):
+      // Row 1: 10EX2 , History
+      let correctValues = [
+        ["10EX2", "History"]
+      ];
+      let table = document.getElementById("resultTableQ9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q10: Bus Routes – Select RouteID and StartTime for EndTime < '08:00' */
+    function checkAnswersQ10() {
+      // Table: BusRoutes
+      // Data:
+      // R001 | Mr. Adams  | 07:00 | 07:45
+      // R002 | Ms. Baker  | 07:15 | 08:00
+      // R003 | Mr. Clark  | 07:30 | 08:15
+      // R004 | Ms. Davis  | 07:45 | 08:30
+      // Expected result (1 row):
+      // Row 1: R001 , 07:00
+      let correctValues = [
+        ["R001", "07:00"]
+      ];
+      let table = document.getElementById("resultTableQ10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>SQL Query Result Trace Table Challenges</h1>
+  <p>
+    Each challenge presents a unique, high school–themed database table (with no more than 5 records) and a SQL query.
+    Fill in the result table with the rows returned by the query.
+    Some queries use the * wildcard (e.g. SELECT *), so be sure to check the SQL statement carefully.
+  </p>
+  
+  <hr>
+  
+  <!-- Q1 -->
+  <section id="q1">
+    <h2>Q1: Race Results – Students in YearGroup 11</h2>
+    <p><strong>Scenario:</strong> The table <code>RaceResults</code> records 100m race results. Show the StudentID and TeamName for all students in year group 11.</p>
+    <div class="data-table">
+      <h3>Database Table: RaceResults</h3>
+      <table>
+        <tr>
+          <th>StudentID</th>
+          <th>YearGroup</th>
+          <th>TeamName</th>
+          <th>Time</th>
+        </tr>
+        <tr>
+          <td>11GC1</td>
+          <td>11</td>
+          <td>Valiants</td>
+          <td>20.3</td>
+        </tr>
+        <tr>
+          <td>10VE1</td>
+          <td>10</td>
+          <td>Super-Team</td>
+          <td>19.7</td>
+        </tr>
+        <tr>
+          <td>10SM1</td>
+          <td>10</td>
+          <td>Super-Team</td>
+          <td>19.2</td>
+        </tr>
+        <tr>
+          <td>11JP2</td>
+          <td>11</td>
+          <td>Champions</td>
+          <td>19.65</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT StudentID, TeamName
+02 FROM RaceResults
+03 WHERE YearGroup = 11
+    </pre>
+    <p><strong>Result Table:</strong> (Fill in the rows returned by the query)</p>
+    <table id="resultTableQ1">
+      <tr>
+        <th>StudentID</th>
+        <th>TeamName</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ1()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q2 -->
+  <section id="q2">
+    <h2>Q2: Club Members – Chess Club Positions</h2>
+    <p><strong>Scenario:</strong> The table <code>ClubMembers</code> stores club membership data. Find the StudentID and Position of members in the Chess Club.</p>
+    <div class="data-table">
+      <h3>Database Table: ClubMembers</h3>
+      <table>
+        <tr>
+          <th>StudentID</th>
+          <th>ClubName</th>
+          <th>JoinYear</th>
+          <th>Position</th>
+        </tr>
+        <tr>
+          <td>11AL1</td>
+          <td>Chess Club</td>
+          <td>2019</td>
+          <td>President</td>
+        </tr>
+        <tr>
+          <td>10BM1</td>
+          <td>Robotics</td>
+          <td>2020</td>
+          <td>Member</td>
+        </tr>
+        <tr>
+          <td>11CN1</td>
+          <td>Chess Club</td>
+          <td>2019</td>
+          <td>Secretary</td>
+        </tr>
+        <tr>
+          <td>10DR1</td>
+          <td>Drama</td>
+          <td>2021</td>
+          <td>Member</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT StudentID, Position
+02 FROM ClubMembers
+03 WHERE ClubName = 'Chess Club'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ2">
+      <tr>
+        <th>StudentID</th>
+        <th>Position</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ2()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q3 -->
+  <section id="q3">
+    <h2>Q3: Test Scores – High Scorers</h2>
+    <p><strong>Scenario:</strong> The table <code>TestScores</code> contains exam results. List the StudentID and Grade for students whose Score is 90 or above.</p>
+    <div class="data-table">
+      <h3>Database Table: TestScores</h3>
+      <table>
+        <tr>
+          <th>StudentID</th>
+          <th>Subject</th>
+          <th>Score</th>
+          <th>Grade</th>
+        </tr>
+        <tr>
+          <td>11EC1</td>
+          <td>Math</td>
+          <td>85</td>
+          <td>B</td>
+        </tr>
+        <tr>
+          <td>11EC2</td>
+          <td>English</td>
+          <td>92</td>
+          <td>A</td>
+        </tr>
+        <tr>
+          <td>10SC1</td>
+          <td>Science</td>
+          <td>78</td>
+          <td>C</td>
+        </tr>
+        <tr>
+          <td>10HS1</td>
+          <td>History</td>
+          <td>88</td>
+          <td>B</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT StudentID, Grade
+02 FROM TestScores
+03 WHERE Score >= 90
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ3">
+      <tr>
+        <th>StudentID</th>
+        <th>Grade</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ3()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q4 -->
+  <section id="q4">
+    <h2>Q4: Attendance – Absent Students</h2>
+    <p><strong>Scenario:</strong> The table <code>Attendance</code> records daily attendance. List the StudentID, Date, and Status for students marked Absent on 2023-04-10.</p>
+    <div class="data-table">
+      <h3>Database Table: Attendance</h3>
+      <table>
+        <tr>
+          <th>StudentID</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>11ST1</td>
+          <td>2023-04-10</td>
+          <td>Present</td>
+        </tr>
+        <tr>
+          <td>11ST2</td>
+          <td>2023-04-10</td>
+          <td>Absent</td>
+        </tr>
+        <tr>
+          <td>10ST1</td>
+          <td>2023-04-10</td>
+          <td>Present</td>
+        </tr>
+        <tr>
+          <td>10ST2</td>
+          <td>2023-04-10</td>
+          <td>Present</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT StudentID, Date, Status
+02 FROM Attendance
+03 WHERE Status = 'Absent'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ4">
+      <tr>
+        <th>StudentID</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ4()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q5 -->
+  <section id="q5">
+    <h2>Q5: Library Books – Available Titles</h2>
+    <p><strong>Scenario:</strong> The table <code>LibraryBooks</code> contains book details. List the Title for books that are available.</p>
+    <div class="data-table">
+      <h3>Database Table: LibraryBooks</h3>
+      <table>
+        <tr>
+          <th>BookID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Available</th>
+        </tr>
+        <tr>
+          <td>B001</td>
+          <td>1984</td>
+          <td>Orwell</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>B002</td>
+          <td>Hamlet</td>
+          <td>Shakespeare</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>B003</td>
+          <td>To Kill a Mockingbird</td>
+          <td>Lee</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>B004</td>
+          <td>The Hobbit</td>
+          <td>Tolkien</td>
+          <td>Yes</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT Title
+02 FROM LibraryBooks
+03 WHERE Available = 'Yes'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ5">
+      <tr>
+        <th>Title</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ5()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q6 -->
+  <section id="q6">
+    <h2>Q6: Cafeteria Sales – Items Sold on Monday</h2>
+    <p><strong>Scenario:</strong> The table <code>CafeteriaSales</code> records items sold in the school cafeteria. List the Item and QuantitySold for sales on Monday.</p>
+    <div class="data-table">
+      <h3>Database Table: CafeteriaSales</h3>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>QuantitySold</th>
+          <th>Day</th>
+        </tr>
+        <tr>
+          <td>Sandwich</td>
+          <td>4.5</td>
+          <td>30</td>
+          <td>Monday</td>
+        </tr>
+        <tr>
+          <td>Salad</td>
+          <td>3.0</td>
+          <td>20</td>
+          <td>Monday</td>
+        </tr>
+        <tr>
+          <td>Juice</td>
+          <td>2.0</td>
+          <td>25</td>
+          <td>Tuesday</td>
+        </tr>
+        <tr>
+          <td>Wrap</td>
+          <td>5.0</td>
+          <td>15</td>
+          <td>Monday</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT Item, QuantitySold
+02 FROM CafeteriaSales
+03 WHERE Day = 'Monday'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ6">
+      <tr>
+        <th>Item</th>
+        <th>QuantitySold</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ6()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q7 -->
+  <section id="q7">
+    <h2>Q7: Sports Teams – Show All Details for Team 'Champions' Using *</h2>
+    <p><strong>Scenario:</strong> The table <code>SportsTeams</code> lists high school sports teams. Use the * wildcard to return all details for the team 'Champions'.</p>
+    <div class="data-table">
+      <h3>Database Table: SportsTeams</h3>
+      <table>
+        <tr>
+          <th>TeamName</th>
+          <th>Coach</th>
+          <th>Wins</th>
+          <th>Losses</th>
+        </tr>
+        <tr>
+          <td>Valiants</td>
+          <td>Mr. Smith</td>
+          <td>8</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Super-Team</td>
+          <td>Ms. Johnson</td>
+          <td>10</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Champions</td>
+          <td>Mr. Lee</td>
+          <td>7</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Warriors</td>
+          <td>Mrs. Brown</td>
+          <td>9</td>
+          <td>1</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT *
+02 FROM SportsTeams
+03 WHERE TeamName = 'Champions'
+    </pre>
+    <p><strong>Result Table:</strong> (Fill in all columns returned by the query)</p>
+    <table id="resultTableQ7">
+      <tr>
+        <th>TeamName</th>
+        <th>Coach</th>
+        <th>Wins</th>
+        <th>Losses</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ7()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q8 -->
+  <section id="q8">
+    <h2>Q8: Student Projects – Select StudentID and Year for Projects with 'Fair' in the Title</h2>
+    <p><strong>Scenario:</strong> The table <code>StudentProjects</code> lists project details. Retrieve the ProjectID and Year for projects whose Title contains the word 'Fair'.</p>
+    <div class="data-table">
+      <h3>Database Table: StudentProjects</h3>
+      <table>
+        <tr>
+          <th>ProjectID</th>
+          <th>Title</th>
+          <th>Supervisor</th>
+          <th>Year</th>
+        </tr>
+        <tr>
+          <td>P001</td>
+          <td>Science Fair</td>
+          <td>Mr. White</td>
+          <td>11</td>
+        </tr>
+        <tr>
+          <td>P002</td>
+          <td>History Exhibit</td>
+          <td>Ms. Green</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>P003</td>
+          <td>Art Installation</td>
+          <td>Mrs. Black</td>
+          <td>11</td>
+        </tr>
+        <tr>
+          <td>P004</td>
+          <td>Robotics Challenge</td>
+          <td>Mr. Blue</td>
+          <td>10</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT ProjectID, Year
+02 FROM StudentProjects
+03 WHERE Title LIKE '%Fair%'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ8">
+      <tr>
+        <th>ProjectID</th>
+        <th>Year</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ8()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q9 -->
+  <section id="q9">
+    <h2>Q9: Exam Results – Select StudentID and Exam for Grade 'A'</h2>
+    <p><strong>Scenario:</strong> The table <code>ExamResults</code> shows exam data. List the StudentID and Exam for students who received Grade 'A'.</p>
+    <div class="data-table">
+      <h3>Database Table: ExamResults</h3>
+      <table>
+        <tr>
+          <th>StudentID</th>
+          <th>Exam</th>
+          <th>Score</th>
+          <th>Grade</th>
+        </tr>
+        <tr>
+          <td>11EX1</td>
+          <td>Math</td>
+          <td>75</td>
+          <td>C</td>
+        </tr>
+        <tr>
+          <td>11EX2</td>
+          <td>English</td>
+          <td>82</td>
+          <td>B</td>
+        </tr>
+        <tr>
+          <td>10EX1</td>
+          <td>Science</td>
+          <td>68</td>
+          <td>D</td>
+        </tr>
+        <tr>
+          <td>10EX2</td>
+          <td>History</td>
+          <td>90</td>
+          <td>A</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT StudentID, Exam
+02 FROM ExamResults
+03 WHERE Grade = 'A'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ9">
+      <tr>
+        <th>StudentID</th>
+        <th>Exam</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ9()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q10 -->
+  <section id="q10">
+    <h2>Q10: Bus Routes – Select RouteID and StartTime for Early Routes</h2>
+    <p><strong>Scenario:</strong> The table <code>BusRoutes</code> lists school bus routes. List the RouteID and StartTime for routes where EndTime is earlier than '08:00'.</p>
+    <div class="data-table">
+      <h3>Database Table: BusRoutes</h3>
+      <table>
+        <tr>
+          <th>RouteID</th>
+          <th>Driver</th>
+          <th>StartTime</th>
+          <th>EndTime</th>
+        </tr>
+        <tr>
+          <td>R001</td>
+          <td>Mr. Adams</td>
+          <td>07:00</td>
+          <td>07:45</td>
+        </tr>
+        <tr>
+          <td>R002</td>
+          <td>Ms. Baker</td>
+          <td>07:15</td>
+          <td>08:00</td>
+        </tr>
+        <tr>
+          <td>R003</td>
+          <td>Mr. Clark</td>
+          <td>07:30</td>
+          <td>08:15</td>
+        </tr>
+        <tr>
+          <td>R004</td>
+          <td>Ms. Davis</td>
+          <td>07:45</td>
+          <td>08:30</td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>SQL Statement:</strong></p>
+    <pre>
+01 SELECT RouteID, StartTime
+02 FROM BusRoutes
+03 WHERE EndTime < '08:00'
+    </pre>
+    <p><strong>Result Table:</strong></p>
+    <table id="resultTableQ10">
+      <tr>
+        <th>RouteID</th>
+        <th>StartTime</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ10()">Check Answers</button>
+  </section>
+  
+</body>
+</html>

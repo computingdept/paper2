@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sorting Algorithms Trace Table Challenges</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 1px;
+      background: #ddd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-size: 1em;
+      overflow-x: auto;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    /* Q1: Bubble Sort – Full Execution
+       Scenario: A teacher uses bubble sort to order student scores stored in an array.
+       Array: [5, 3, 8, 4, 2]
+       Pseudocode shows the outer and inner loops, comparisons, swaps, and printing after each pass.
+    */
+    function checkAnswersQ1() {
+      // Expected trace (sample):
+      // Row 1 (Line 01): "array = 5,3,8,4,2"
+      // Row 2 (Line 09): "After pass 1: 3,5,4,2,8"
+      // Row 3 (Line 09): "After pass 2: 3,4,2,5,8"
+      // Row 4 (Line 09): "After pass 3: 3,2,4,5,8"
+      // Row 5 (Line 09): "After pass 4: 2,3,4,5,8"
+      let correctValues = [
+        ["01", "array = 5,3,8,4,2", ""],
+        ["09", "After pass 1: 3,5,4,2,8", ""],
+        ["09", "After pass 2: 3,4,2,5,8", ""],
+        ["09", "After pass 3: 3,2,4,5,8", ""],
+        ["09", "After pass 4: 2,3,4,5,8", ""]
+      ];
+      let table = document.getElementById("traceTableQ1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q2: Bubble Sort – First Swap Only
+       Scenario: In a computer lab, a student examines the first swap in bubble sort for array [5,3,8,4,2].
+       Pseudocode focuses on the first comparison and swap.
+    */
+    function checkAnswersQ2() {
+      // Expected trace:
+      // Row 1 (Line 04): "Compare index 0 and 1: 5 > 3 (true)"
+      // Row 2 (Line 05): "Swap: 5 and 3" resulting in array: 3,5,8,4,2
+      let correctValues = [
+        ["04", "Compare index 0 and 1: 5 > 3 (true)", ""],
+        ["05", "Swap: 5 and 3", "Array: 3,5,8,4,2"]
+      ];
+      let table = document.getElementById("traceTableQ2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q3: Insertion Sort – Full Execution
+       Scenario: A teacher sorts an unsorted array [7,4,9,1] using insertion sort.
+       Pseudocode details the inner loop where elements are shifted and the key inserted.
+    */
+    function checkAnswersQ3() {
+      // Expected trace (sample):
+      // Row 1 (Line 01): "array = 7,4,9,1"
+      // Row 2 (Line 09): "After pass 1: 4,7,9,1"
+      // Row 3 (Line 09): "After pass 2: 4,7,9,1" (no change, since 9 >= 7)
+      // Row 4 (Line 09): "After pass 3: 1,4,7,9"
+      let correctValues = [
+        ["01", "array = 7,4,9,1", ""],
+        ["09", "After pass 1: 4,7,9,1", ""],
+        ["09", "After pass 2: 4,7,9,1", ""],
+        ["09", "After pass 3: 1,4,7,9", ""]
+      ];
+      let table = document.getElementById("traceTableQ3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q4: Insertion Sort – Key Insertion Step
+       Scenario: In the same insertion sort on [7,4,9,1], record the key insertion step when i = 3.
+       Pseudocode shows key assignment, shifting, and final insertion.
+    */
+    function checkAnswersQ4() {
+      // Expected trace:
+      // Row 1 (Line 03): "key = 1"
+      // Row 2 (Line 05-07): "Shift: 9, then 7, then 4"
+      // Row 3 (Line 09): "Insert key at index 0"
+      let correctValues = [
+        ["03", "key = 1", ""],
+        ["05-07", "Shift: 9, then 7, then 4", ""],
+        ["09", "Insert key at index 0", "Array becomes 1,4,7,9"]
+      ];
+      let table = document.getElementById("traceTableQ4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q5: Merge Sort – Splitting Phase
+       Scenario: A student applies merge sort to the array [3,1,4,2] and shows how it is split.
+       Pseudocode details the splitting into two halves and further splitting.
+    */
+    function checkAnswersQ5() {
+      // Expected trace:
+      // Row 1 (Line 01): "array = 3,1,4,2"
+      // Row 2 (Line 02): "Split into left = 3,1 and right = 4,2"
+      // Row 3 (Line 03-04): "Left split into [3] and [1]; Right split into [4] and [2]"
+      // Row 4 (Line 05): "Splitting complete"
+      let correctValues = [
+        ["01", "array = 3,1,4,2", ""],
+        ["02", "Split into left = 3,1 and right = 4,2", ""],
+        ["03-04", "Left -> [3] and [1]; Right -> [4] and [2]", ""],
+        ["05", "", "Splitting complete"]
+      ];
+      let table = document.getElementById("traceTableQ5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q6: Merge Sort – Merging Phase
+       Scenario: A student merges two sorted subarrays: left = [3] and right = [1] to form [1,3].
+       Pseudocode shows the merging step.
+    */
+    function checkAnswersQ6() {
+      // Expected trace:
+      // Row 1 (Line 01-03): "left = [3], right = [1]"
+      // Row 2 (Line 04-12): "Compare: 3 vs 1, choose 1; then append remaining 3"
+      // Row 3 (Line 13): "Merged array: [1,3]"
+      let correctValues = [
+        ["01-03", "left = [3], right = [1]", ""],
+        ["04-12", "Merge: 1 then 3", ""],
+        ["13", "", "Merged array: [1,3]"]
+      ];
+      let table = document.getElementById("traceTableQ6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q7: Merge Sort – Full Execution
+       Scenario: A student fully sorts the array [3,1,4,2] using merge sort.
+       Pseudocode would include both the splitting and merging phases.
+       (For brevity, expected trace shows only the final sorted array.)
+    */
+    function checkAnswersQ7() {
+      // Expected trace:
+      // Row 1 (Line 01): "array = 3,1,4,2"
+      // Row 2 (Final): "Sorted array: 1,2,3,4"
+      let correctValues = [
+        ["01", "array = 3,1,4,2", ""],
+        ["Final", "", "Sorted array: 1,2,3,4"]
+      ];
+      let table = document.getElementById("traceTableQ7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q8: Bubble Sort – Already Sorted (No Swaps)
+       Scenario: The array [2,3,5,7,11] is already sorted.
+       Pseudocode shows one pass with no swaps.
+    */
+    function checkAnswersQ8() {
+      // Expected trace:
+      // Row 1 (Line 01): "array = 2,3,5,7,11"
+      // Row 2 (Line 09): "After pass 1: 2,3,5,7,11 (no swaps)"
+      let correctValues = [
+        ["01", "array = 2,3,5,7,11", ""],
+        ["09", "After pass 1: 2,3,5,7,11 (no swaps)", ""]
+      ];
+      let table = document.getElementById("traceTableQ8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q9: Insertion Sort – Best Case (Already Sorted)
+       Scenario: The array [1,2,3,4,5] is already sorted. No shifting occurs.
+    */
+    function checkAnswersQ9() {
+      // Expected trace:
+      // Row 1 (Line 01): "array = 1,2,3,4,5"
+      // Row 2 (Line 09): "After each pass, array remains 1,2,3,4,5"
+      let correctValues = [
+        ["01", "array = 1,2,3,4,5", ""],
+        ["09", "After each pass, array remains 1,2,3,4,5", ""]
+      ];
+      let table = document.getElementById("traceTableQ9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q10: Insertion Sort – Worst Case (Reverse Order)
+       Scenario: The array [5,4,3,2,1] is sorted using insertion sort.
+       Expected final result is [1,2,3,4,5] with multiple shifts.
+    */
+    function checkAnswersQ10() {
+      // Expected trace:
+      // Row 1 (Line 01): "array = 5,4,3,2,1"
+      // Row 2 (Line 09): "After pass 1: 4,5,3,2,1"
+      // Row 3 (Line 09): "After pass 2: 3,4,5,2,1"
+      // Row 4 (Line 09): "After pass 3: 2,3,4,5,1"
+      // Row 5 (Line 09): "After pass 4: 1,2,3,4,5"
+      let correctValues = [
+        ["01", "array = 5,4,3,2,1", ""],
+        ["09", "After pass 1: 4,5,3,2,1", ""],
+        ["09", "After pass 2: 3,4,5,2,1", ""],
+        ["09", "After pass 3: 2,3,4,5,1", ""],
+        ["09", "After pass 4: 1,2,3,4,5", ""]
+      ];
+      let table = document.getElementById("traceTableQ10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Standard Sorting Algorithms Trace Table Challenges</h1>
+  <p>
+    Below are 10 trace table challenges based on standard sorting algorithms:
+    Bubble sort, Merge sort, and Insertion sort.
+    Each question provides pseudocode with explicit line numbers and a scenario.
+    In the trace table, enter the subprogram call (prefixed with "procedure" or "function" and including parameters if needed)
+    and record any output produced.
+  </p>
+  
+  <hr>
+  
+  <!-- Q1: Bubble Sort – Full Execution -->
+  <section id="q1">
+    <h2>Q1: Bubble Sort – Full Execution</h2>
+    <p><strong>Scenario:</strong> A teacher sorts an array of student scores [5,3,8,4,2] using bubble sort.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [5,3,8,4,2]
+02 for pass = 1 to 4
+03   for i = 0 to 3
+04      if array[i] > array[i+1] then
+05         swap array[i] and array[i+1]
+06      endif
+07   endfor
+08   print("After pass " + pass + ": " + array)
+09 endfor
+    </pre>
+    <table id="traceTableQ1">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows (example) -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ1()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q2: Bubble Sort – First Swap -->
+  <section id="q2">
+    <h2>Q2: Bubble Sort – First Swap</h2>
+    <p><strong>Scenario:</strong> In a computer lab, a student records only the first swap when sorting [5,3,8,4,2] using bubble sort.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [5,3,8,4,2]
+02 if array[0] > array[1] then
+03    swap array[0] and array[1]
+04    print("Swap: " + array[0] + " and " + array[1] + " => " + array)
+05 endif
+    </pre>
+    <table id="traceTableQ2">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ2()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q3: Insertion Sort – Full Execution -->
+  <section id="q3">
+    <h2>Q3: Insertion Sort – Full Execution</h2>
+    <p><strong>Scenario:</strong> A teacher sorts an array of numbers [7,4,9,1] using insertion sort.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [7,4,9,1]
+02 for i = 1 to 3
+03     key = array[i]
+04     j = i - 1
+05     while (j >= 0 and array[j] > key)
+06         array[j+1] = array[j]
+07         j = j - 1
+08     endwhile
+09     array[j+1] = key
+10     print("After pass " + i + ": " + array)
+11 endfor
+    </pre>
+    <table id="traceTableQ3">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Example expected rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ3()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q4: Insertion Sort – Key Insertion Step -->
+  <section id="q4">
+    <h2>Q4: Insertion Sort – Key Insertion Step</h2>
+    <p><strong>Scenario:</strong> In the insertion sort of [7,4,9,1], record the key insertion step for i=3.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [7,4,9,1]
+02 i = 3
+03 key = array[3]
+04 j = i - 1
+05 while (j >= 0 and array[j] > key)
+06     array[j+1] = array[j]
+07     j = j - 1
+08 endwhile
+09 array[j+1] = key
+10 print("After pass 3: " + array)
+    </pre>
+    <table id="traceTableQ4">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows (example) -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ4()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q5: Merge Sort – Splitting Phase -->
+  <section id="q5">
+    <h2>Q5: Merge Sort – Splitting Phase</h2>
+    <p><strong>Scenario:</strong> A student applies merge sort to the array [3,1,4,2] and shows the splitting phase.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [3,1,4,2]
+02 left = [3,1]    ; right = [4,2]
+03 left split: [3] and [1]
+04 right split: [4] and [2]
+05 print("Splitting complete")
+    </pre>
+    <table id="traceTableQ5">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ5()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q6: Merge Sort – Merging Phase -->
+  <section id="q6">
+    <h2>Q6: Merge Sort – Merging Phase</h2>
+    <p><strong>Scenario:</strong> A student merges two sorted subarrays: left = [3] and right = [1] into a sorted array.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 left = [3]
+02 right = [1]
+03 i = 0, j = 0, k = 0
+04 while (i < 1 and j < 1)
+05     if left[i] < right[j] then
+06         merged[k] = left[i]
+07         i = i + 1
+08     else
+09         merged[k] = right[j]
+10         j = j + 1
+11     endif
+12     k = k + 1
+13 endwhile
+14 while (i < 1)
+15     merged[k] = left[i]
+16     i = i + 1; k = k + 1
+17 endwhile
+18 while (j < 1)
+19     merged[k] = right[j]
+20     j = j + 1; k = k + 1
+21 endwhile
+22 print("Merged array: " + merged)
+    </pre>
+    <table id="traceTableQ6">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ6()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q7: Merge Sort – Full Execution -->
+  <section id="q7">
+    <h2>Q7: Merge Sort – Full Execution</h2>
+    <p><strong>Scenario:</strong> A student sorts the array [3,1,4,2] completely using merge sort. (For brevity, only the final sorted result is recorded.)</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [3,1,4,2]
+... (recursive splitting and merging) ...
+Final: sorted = [1,2,3,4]
+    </pre>
+    <table id="traceTableQ7">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ7()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q8: Bubble Sort – Already Sorted -->
+  <section id="q8">
+    <h2>Q8: Bubble Sort – Already Sorted</h2>
+    <p><strong>Scenario:</strong> The array [2,3,5,7,11] is already sorted. The program runs one pass and detects no swaps.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [2,3,5,7,11]
+02 for pass = 1 to 4
+03   for i = 0 to 3
+04      if array[i] > array[i+1] then
+05         swap array[i] and array[i+1]
+06      endif
+07   endfor
+08   print("After pass " + pass + ": " + array)
+09 endfor
+    </pre>
+    <table id="traceTableQ8">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ8()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q9: Insertion Sort – Best Case -->
+  <section id="q9">
+    <h2>Q9: Insertion Sort – Best Case</h2>
+    <p><strong>Scenario:</strong> The array [1,2,3,4,5] is already sorted. A student records that no shifting occurs during insertion sort.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [1,2,3,4,5]
+02 for i = 1 to 4
+03    key = array[i]
+04    j = i - 1
+05    while (j >= 0 and array[j] > key)
+06         array[j+1] = array[j]
+07         j = j - 1
+08    endwhile
+09    array[j+1] = key
+10    print("After pass " + i + ": " + array)
+11 endfor
+    </pre>
+    <table id="traceTableQ9">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace row: -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ9()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q10: Insertion Sort – Worst Case -->
+  <section id="q10">
+    <h2>Q10: Insertion Sort – Worst Case</h2>
+    <p><strong>Scenario:</strong> A student sorts a reverse-ordered array [5,4,3,2,1] using insertion sort. Record the array after each pass.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 array = [5,4,3,2,1]
+02 for i = 1 to 4
+03    key = array[i]
+04    j = i - 1
+05    while (j >= 0 and array[j] > key)
+06         array[j+1] = array[j]
+07         j = j - 1
+08    endwhile
+09    array[j+1] = key
+10    print("After pass " + i + ": " + array)
+11 endfor
+    </pre>
+    <table id="traceTableQ10">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <!-- Expected trace rows (example): -->
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ10()">Check Answers</button>
+  </section>
+  
+</body>
+</html>
+

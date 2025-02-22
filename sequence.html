@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sequence Trace Table Challenges (with Casting)</title>
+  <style>
+    /* Base styling using Apple-like system fonts and a modern, airy look */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2em;
+      margin-bottom: 40px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: #ddd;
+      margin: 40px 0;
+    }
+    h2 {
+      font-size: 1.6em;
+      line-height: 1.4;
+      margin-bottom: 15px;
+      color: #222;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      font-size: 0.95em;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #fafafa;
+      font-weight: 600;
+    }
+    input[type="text"] {
+      width: 90%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    // ============================
+    // Examples 1 - 9: Basic Arithmetic, Boolean & Casting
+    // ============================
+
+    // Example 1: Add Two Numbers
+    function checkAnswersEx1() {
+      // Each row: [Line Number, a, b, sum, Output]
+      let correctValues = [
+        ["01", "5", "", "", ""],
+        ["02", "", "3", "", ""],
+        ["03", "", "", "8", ""],
+        ["04", "", "", "", "Sum is 8"]
+      ];
+      let table = document.getElementById("traceTableEx1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    // Example 2: Subtract Two Numbers
+    function checkAnswersEx2() {
+      // Each row: [Line Number, a, b, diff, Output]
+      let correctValues = [
+        ["01", "10", "", "", ""],
+        ["02", "", "4", "", ""],
+        ["03", "", "", "6", ""],
+        ["04", "", "", "", "Difference is 6"]
+      ];
+      let table = document.getElementById("traceTableEx2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+        let inputs = rows[i].getElementsByTagName("input");
+        let correct = correctValues[i - 1];
+        for (let j = 0; j < inputs.length; j++) {
+          inputs[j].style.backgroundColor =
+            (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+        }
+      }
+    }
+
+    // Example 3: Multiply Two Numbers
+    function checkAnswersEx3() {
+      // Each row: [Line Number, a, b, product, Output]
+      let correctValues = [
+        ["01", "7", "", "", ""],
+        ["02", "", "6", "", ""],
+        ["03", "", "", "42", ""],
+        ["04", "", "", "", "Product is 42"]
+      ];
+      let table = document.getElementById("traceTableEx3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    // Example 4: Divide Two Numbers
+    function checkAnswersEx4() {
+      // Each row: [Line Number, a, b, quotient, Output]
+      let correctValues = [
+        ["01", "20", "", "", ""],
+        ["02", "", "4", "", ""],
+        ["03", "", "", "5", ""],
+        ["04", "", "", "", "Quotient is 5"]
+      ];
+      let table = document.getElementById("traceTableEx4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    // Example 5: Exponentiation
+    function checkAnswersEx5() {
+      // Each row: [Line Number, base, exponent, result, Output]
+      let correctValues = [
+        ["01", "3", "", "", ""],
+        ["02", "", "4", "", ""],
+        ["03", "", "", "81", ""],
+        ["04", "", "", "", "Result is 81"]
+      ];
+      let table = document.getElementById("traceTableEx5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    // Example 6: Mixed Arithmetic Expression (MOD and DIV)
+    function checkAnswersEx6() {
+      // Each row: [Line Number, a, b, modResult, divResult, result, Output]
+      let correctValues = [
+        ["01", "17", "", "", "", "", ""],
+        ["02", "", "5", "", "", "", ""],
+        ["03", "", "", "2", "", "", ""],
+        ["04", "", "", "", "3", "", ""],
+        ["05", "", "", "", "", "27", ""],
+        ["06", "", "", "", "", "", "Result is 27"]
+      ];
+      let table = document.getElementById("traceTableEx6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    // Example 7: Boolean Expression Evaluation
+    function checkAnswersEx7() {
+      // Each row: [Line Number, p, q, r, Output]
+      let correctValues = [
+        ["01", "true", "", "", ""],
+        ["02", "", "false", "", ""],
+        ["03", "", "", "true", ""],
+        ["04", "", "", "", "Result is true"]
+      ];
+      let table = document.getElementById("traceTableEx7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    // Example 8: Cast Integer to String
+    function checkAnswersEx8() {
+      // Each row: [Line Number, a, s, Output]
+      let correctValues = [
+        ["01", "345", "", ""],
+        ["02", "", "345", ""],
+        ["03", "", "", "s is 345"]
+      ];
+      let table = document.getElementById("traceTableEx8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    // Example 9: Cast String to Integer
+    function checkAnswersEx9() {
+      // Each row: [Line Number, s, n, Output]
+      let correctValues = [
+        ["01", "3", "", ""],
+        ["02", "", "3", ""],
+        ["03", "", "", "n is 3"]
+      ];
+      let table = document.getElementById("traceTableEx9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Sequence Trace Table Challenges</h1>
+  <p>
+    These challenges show how a programme runs line by line in <strong>SEQUENCE</strong>—without any <strong>SELECTION</strong> (like “if” or switch/case) or <strong>ITERATION</strong> (for/while loops). Each line happens in order, and we keep track of the values and outputs at each step.
+  </p>
+
+  <hr>
+
+  <!-- Example 1: Add Two Numbers -->
+  <section id="ex1">
+    <h2>
+      At a small café, customers use a machine to pay for their food. One customer enters 5 for one item and 3 for another.
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 a = int(input("First number"))
+02 b = int(input("Second number"))
+03 sum = a + b
+04 print("Sum is " + sum)
+    </pre>
+    <p>Record the trace only when a value changes or output is produced.</p>
+    <table id="traceTableEx1">
+      <tr>
+        <th>Line Number</th>
+        <th>a</th>
+        <th>b</th>
+        <th>sum</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx1()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 2: Subtract Two Numbers -->
+  <section id="ex2">
+    <h2>
+      Example 2: Sweet Shop Stock – A local sweet shop has 10 chocolate bars and sells 4. How many bars are left?
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 a = int(input("First number"))
+02 b = int(input("Second number"))
+03 diff = a - b
+04 print("Difference is " + diff)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx2">
+      <tr>
+        <th>Line Number</th>
+        <th>a</th>
+        <th>b</th>
+        <th>diff</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx2()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 3: Multiply Two Numbers -->
+  <section id="ex3">
+    <h2>
+      Example 3: Post Office Parcels – The post office gets 7 parcels, each with 6 letters. How many letters are there in total?
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 a = int(input("First number"))
+02 b = int(input("Second number"))
+03 product = a * b
+04 print("Product is " + product)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx3">
+      <tr>
+        <th>Line Number</th>
+        <th>a</th>
+        <th>b</th>
+        <th>product</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx3()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 4: Divide Two Numbers -->
+  <section id="ex4">
+    <h2>
+      Example 4: Bakery Scones – A bakery packs 20 scones equally into 4 boxes. How many scones go in each box?
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 a = int(input("First number"))
+02 b = int(input("Second number"))
+03 quotient = a / b
+04 print("Quotient is " + quotient)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx4">
+      <tr>
+        <th>Line Number</th>
+        <th>a</th>
+        <th>b</th>
+        <th>quotient</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx4()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 5: Exponentiation -->
+  <section id="ex5">
+    <h2>
+      Example 5: Football Bonus – A football club gets a bonus calculated as 3 raised to the power of 4. What is the bonus score?
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 base = int(input("Base"))
+02 exponent = int(input("Exponent"))
+03 result = base ^ exponent
+04 print("Result is " + result)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx5">
+      <tr>
+        <th>Line Number</th>
+        <th>base</th>
+        <th>exponent</th>
+        <th>result</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx5()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 6: Mixed Arithmetic Expression (MOD and DIV) -->
+  <section id="ex6">
+    <h2>
+      Example 6: Sharing Pencils – A class has 17 pencils that are shared equally among 5 pupils. How many pencils does each get and how many are left?
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 a = int(input("First number"))
+02 b = int(input("Second number"))
+03 modResult = a MOD b
+04 divResult = a DIV b
+05 result = (a - b) * modResult + divResult
+06 print("Result is " + result)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx6">
+      <tr>
+        <th>Line Number</th>
+        <th>a</th>
+        <th>b</th>
+        <th>modResult</th>
+        <th>divResult</th>
+        <th>result</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx6()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 7: Boolean Expression Evaluation -->
+  <section id="ex7">
+    <h2>
+      Example 7: Home Alarm – A home alarm system checks two sensors. One sensor is on (true) and the other is off (false). What is the final alarm status?
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 p = true
+02 q = false
+03 r = p AND (NOT q)
+04 print("Result is " + r)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx7">
+      <tr>
+        <th>Line Number</th>
+        <th>p</th>
+        <th>q</th>
+        <th>r</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx7()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 8: Cast Integer to String -->
+  <section id="ex8">
+    <h2>
+      Example 8: Bus Ticket Number – A bus ticket shows the number 345. It is converted into text for display.
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 a = 345
+02 s = str(a)
+03 print("s is " + s)
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx8">
+      <tr>
+        <th>Line Number</th>
+        <th>a</th>
+        <th>s</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx8()">Check Answers</button>
+  </section>
+
+  <hr>
+
+  <!-- Example 9: Cast String to Integer -->
+  <section id="ex9">
+    <h2>
+      Example 9: Convert Price – In a shop, the text "3" is changed into the number 3 so it can be used in maths.
+    </h2>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 s = "3"
+02 n = int(s)
+03 print("n is " + str(n))
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableEx9">
+      <tr>
+        <th>Line Number</th>
+        <th>s</th>
+        <th>n</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersEx9()">Check Answers</button>
+  </section>
+  
+  <!-- Additional examples can be added below following the same structure -->
+
+</body>
+</html>

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boolean Logic Truth Table Challenges with Diagrams</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 1px;
+      background: #ddd;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 1em;
+      overflow-x: auto;
+      border-radius: 6px;
+      margin: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input {
+      width: 90%;
+      padding: 4px;
+      text-align: center;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+    /* Container for question content and diagram */
+    .flex-container {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .content {
+      flex: 1;
+    }
+    .diagram {
+      flex: 0 0 320px;
+      border: 1px solid #000;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+  </style>
+  <script>
+    /* Q1: Expression: A AND B
+       Scenario: A school security door opens only if both sensor A and sensor B are activated.
+       Truth table for A AND B:
+         A   B   A AND B
+         0   0      0
+         0   1      0
+         1   0      0
+         1   1      1
+    */
+    function checkAnswersQ1() {
+      const correctValues = [
+        ["0", "0", "0"],
+        ["0", "1", "0"],
+        ["1", "0", "0"],
+        ["1", "1", "1"]
+      ];
+      let table = document.getElementById("truthTableQ1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q2: Expression: A OR B
+       Scenario: A club’s alarm sounds if either sensor A or sensor B detects movement.
+       Truth table for A OR B:
+         A   B   A OR B
+         0   0      0
+         0   1      1
+         1   0      1
+         1   1      1
+    */
+    function checkAnswersQ2() {
+      const correctValues = [
+        ["0", "0", "0"],
+        ["0", "1", "1"],
+        ["1", "0", "1"],
+        ["1", "1", "1"]
+      ];
+      let table = document.getElementById("truthTableQ2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q3: Expression: NOT A
+       Scenario: A school digital display shows the opposite of sensor A’s state.
+       Truth table for NOT A:
+         A   NOT A
+         0     1
+         1     0
+    */
+    function checkAnswersQ3() {
+      const correctValues = [
+        ["0", "1"],
+        ["1", "0"]
+      ];
+      let table = document.getElementById("truthTableQ3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q4: Expression: (A AND B) OR C
+       Scenario: In a school lab, a light turns on if both sensors A and B detect motion OR if sensor C signals an emergency.
+       Truth table for (A AND B) OR C (3 inputs, 8 rows)
+    */
+    function checkAnswersQ4() {
+      const correctValues = [
+        ["0", "0", "0", "0"],
+        ["0", "0", "1", "1"],
+        ["0", "1", "0", "0"],
+        ["0", "1", "1", "1"],
+        ["1", "0", "0", "0"],
+        ["1", "0", "1", "1"],
+        ["1", "1", "0", "1"],
+        ["1", "1", "1", "1"]
+      ];
+      let table = document.getElementById("truthTableQ4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q5: Expression: A AND (NOT B)
+       Scenario: A digital lock opens if sensor A is active and sensor B is off.
+       Truth table for A AND (NOT B):
+         A   B   NOT B   A AND (NOT B)
+         0   0     1         0
+         0   1     0         0
+         1   0     1         1
+         1   1     0         0
+    */
+    function checkAnswersQ5() {
+      const correctValues = [
+        ["0", "0", "0"],
+        ["0", "1", "0"],
+        ["1", "0", "1"],
+        ["1", "1", "0"]
+      ];
+      let table = document.getElementById("truthTableQ5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+           inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q6: Expression: (A OR B) AND NOT C
+       Scenario: A school project alert sounds if either sensor A or B is on, but only if sensor C is off.
+       Truth table for (A OR B) AND NOT C (3 inputs, 8 rows)
+    */
+    function checkAnswersQ6() {
+      const correctValues = [
+        ["0", "0", "0", "0"],
+        ["0", "0", "1", "0"],
+        ["0", "1", "0", "1"],
+        ["0", "1", "1", "0"],
+        ["1", "0", "0", "1"],
+        ["1", "0", "1", "0"],
+        ["1", "1", "0", "1"],
+        ["1", "1", "1", "0"]
+      ];
+      let table = document.getElementById("truthTableQ6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q7: Expression: NOT (A OR B)
+       Scenario: A simple digital inverter outputs the opposite of (A OR B).
+       Truth table for NOT (A OR B):
+         A   B   A OR B   NOT (A OR B)
+         0   0     0            1
+         0   1     1            0
+         1   0     1            0
+         1   1     1            0
+    */
+    function checkAnswersQ7() {
+      const correctValues = [
+        ["0", "0", "1"],
+        ["0", "1", "0"],
+        ["1", "0", "0"],
+        ["1", "1", "0"]
+      ];
+      let table = document.getElementById("truthTableQ7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q8: Expression: (A AND NOT B) OR (NOT A AND B) [XOR]
+       Scenario: A digital circuit computes the exclusive OR (XOR) of two inputs.
+       Truth table for XOR:
+         A   B   XOR
+         0   0    0
+         0   1    1
+         1   0    1
+         1   1    0
+    */
+    function checkAnswersQ8() {
+      const correctValues = [
+        ["0", "0", "0"],
+        ["0", "1", "1"],
+        ["1", "0", "1"],
+        ["1", "1", "0"]
+      ];
+      let table = document.getElementById("truthTableQ8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q9: Expression: (A OR (NOT B)) AND C
+       Scenario: In a school project, an alert is triggered if either sensor A is on or sensor B is off, and sensor C confirms the condition.
+       (3 inputs, 8 rows)
+    */
+    function checkAnswersQ9() {
+      const correctValues = [
+        ["0", "0", "0", "0"],
+        ["0", "0", "1", "1"],
+        ["0", "1", "0", "0"],
+        ["0", "1", "1", "0"],
+        ["1", "0", "0", "1"],
+        ["1", "0", "1", "1"],
+        ["1", "1", "0", "0"],
+        ["1", "1", "1", "1"]
+      ];
+      let table = document.getElementById("truthTableQ9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    /* Q10: Expression: (A AND B) OR (NOT C)
+       Scenario: A school control system activates if both sensors A and B are on or if sensor C is off.
+       (3 inputs, 8 rows)
+    */
+    function checkAnswersQ10() {
+      const correctValues = [
+        ["0", "0", "0", "1"],
+        ["0", "0", "1", "0"],
+        ["0", "1", "0", "1"],
+        ["0", "1", "1", "0"],
+        ["1", "0", "0", "1"],
+        ["1", "0", "1", "0"],
+        ["1", "1", "0", "1"],
+        ["1", "1", "1", "1"]
+      ];
+      let table = document.getElementById("truthTableQ10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor = (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Boolean Logic Truth Table Challenges with Diagrams</h1>
+  <p>
+    For each question below, complete the truth table for the given Boolean expression (using 0 for false and 1 for true). To the right of each question is a detailed ASCII diagram of the logic gate(s) involved.
+  </p>
+  
+  <hr>
+  
+  <!-- Q1 -->
+  <section id="q1">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q1: Security Door (A AND B)</h2>
+        <p><strong>Scenario:</strong> A school security door opens only if both sensor A and sensor B are active.</p>
+        <p><strong>Expression:</strong> A AND B</p>
+        <table id="truthTableQ1">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>A AND B</th>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ1()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |  AND  )--- Output
+   B ---|_______/
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q2 -->
+  <section id="q2">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q2: Club Alarm (A OR B)</h2>
+        <p><strong>Scenario:</strong> A club’s alarm sounds if either sensor A or sensor B is triggered.</p>
+        <p><strong>Expression:</strong> A OR B</p>
+        <table id="truthTableQ2">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>A OR B</th>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ2()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |   OR  )--- Output
+   B ---|_______/
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q3 -->
+  <section id="q3">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q3: Digital Inverter (NOT A)</h2>
+        <p><strong>Scenario:</strong> A school display shows the opposite of sensor A’s state.</p>
+        <p><strong>Expression:</strong> NOT A</p>
+        <table id="truthTableQ3">
+          <tr>
+            <th>A</th>
+            <th>NOT A</th>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ3()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+        -----
+   A ---| NOT |--- Output
+        -----
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q4 -->
+  <section id="q4">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q4: Lab Alert – (A AND B) OR C</h2>
+        <p><strong>Scenario:</strong> In a school lab, a light turns on if both sensors A and B detect motion OR if sensor C signals an emergency.</p>
+        <p><strong>Expression:</strong> (A AND B) OR C</p>
+        <table id="truthTableQ4">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>(A AND B) OR C</th>
+          </tr>
+          <!-- 8 rows for 3 inputs -->
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ4()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |  AND  )--- 
+   B ---|_______/    \
+                     | OR )--- Output
+              C ----|____/
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q5 -->
+  <section id="q5">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q5: Digital Lock – A AND (NOT B)</h2>
+        <p><strong>Scenario:</strong> A digital lock opens if sensor A is active and sensor B is not active.</p>
+        <p><strong>Expression:</strong> A AND (NOT B)</p>
+        <table id="truthTableQ5">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>A AND (NOT B)</th>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ5()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |  AND  )--- Output
+         |_______/
+             ^
+             |
+          -----
+         | NOT |
+          -----
+             |
+             B
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q6 -->
+  <section id="q6">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q6: Alert System – (A OR B) AND NOT C</h2>
+        <p><strong>Scenario:</strong> A school project alert sounds if either sensor A or sensor B is active, but only if sensor C is off.</p>
+        <p><strong>Expression:</strong> (A OR B) AND NOT C</p>
+        <table id="truthTableQ6">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>(A OR B) AND NOT C</th>
+          </tr>
+          <!-- 8 rows -->
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ6()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+          _______
+   A ---|       \
+         |  OR   )--- 
+   B ---|_______/     
+                      \
+                       | AND --- Output
+                       |
+                  ----- 
+                 | NOT |
+                  -----
+                     |
+                     C
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q7 -->
+  <section id="q7">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q7: Inverter Circuit – NOT (A OR B)</h2>
+        <p><strong>Scenario:</strong> A simple inverter outputs the opposite of (A OR B).</p>
+        <p><strong>Expression:</strong> NOT (A OR B)</p>
+        <table id="truthTableQ7">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>NOT (A OR B)</th>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ7()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |  OR   )---
+   B ---|_______/    \
+                     | NOT --- Output
+                     |_____
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q8 -->
+  <section id="q8">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q8: Exclusive OR (XOR) Circuit</h2>
+        <p><strong>Scenario:</strong> A digital circuit calculates the exclusive OR (XOR) of two inputs using the expression (A AND NOT B) OR (NOT A AND B).</p>
+        <p><strong>Expression:</strong> (A AND NOT B) OR (NOT A AND B)</p>
+        <table id="truthTableQ8">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>XOR</th>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ8()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+          _______          _______
+   A ---|       \      /       |---
+         |  AND  )----/   OR   )--- Output (XOR)
+         |_______/      \_______|
+             |               |
+           -----           -----
+          | NOT |         | NOT |
+           -----           -----
+             |               |
+             B               A
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q9 -->
+  <section id="q9">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q9: Mixed Logic – (A OR (NOT B)) AND C</h2>
+        <p><strong>Scenario:</strong> In a school project, an alert is triggered if either sensor A is active or sensor B is off, and sensor C confirms the condition.</p>
+        <p><strong>Expression:</strong> (A OR (NOT B)) AND C</p>
+        <table id="truthTableQ9">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>Result</th>
+          </tr>
+          <!-- 8 rows -->
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ9()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |  OR   )--- 
+         |_______/    \
+              |      | AND --- Output
+              |   ----- 
+              |  | NOT |
+              |   -----
+              |      |
+              B      C
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+  <hr>
+  
+  <!-- Q10 -->
+  <section id="q10">
+    <div class="flex-container">
+      <div class="content">
+        <h2>Q10: Control System – (A AND B) OR (NOT C)</h2>
+        <p><strong>Scenario:</strong> A school control system activates if both sensors A and B are on or if sensor C is off.</p>
+        <p><strong>Expression:</strong> (A AND B) OR (NOT C)</p>
+        <table id="truthTableQ10">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>Result</th>
+          </tr>
+          <!-- 8 rows -->
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="A"></td>
+            <td><input type="text" placeholder="B"></td>
+            <td><input type="text" placeholder="C"></td>
+            <td><input type="text" placeholder="Output"></td>
+          </tr>
+        </table>
+        <button onclick="checkAnswersQ10()">Check Answers</button>
+      </div>
+      <div class="diagram">
+        <pre>
+         _______
+   A ---|       \
+         |  AND  )--- 
+   B ---|_______/    \
+                     | OR --- Output
+                     |______ 
+                         |
+                      -----
+                     | NOT |
+                      -----
+                         |
+                         C
+        </pre>
+      </div>
+    </div>
+  </section>
+  
+</body>
+</html>

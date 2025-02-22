@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passcode Trace Table Challenge</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 40px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #fafafa;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      font-size: 1.1em;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    function checkAnswersTruth() {
+      let correctValues = [
+        ["01", "", "", "J277", "", ""],
+        ["02", "", "", "", "false", ""],
+        ["03", "0", "", "", "", ""],
+        ["05", "1", "", "", "", ""],
+        ["06", "", "Computer", "", "", ""],
+        ["10", "", "", "", "", "Incorrect"],
+        ["05", "2", "", "", "", ""],
+        ["06", "", "Science", "", "", ""],
+        ["10", "", "", "", "", "Incorrect"],
+        ["05", "3", "", "", "", ""],
+        ["06", "", "J277", "", "", ""],
+        ["08", "", "", "", "true", ""],
+        ["13", "", "", "", "", "3 guesses"]
+      ];
+      
+      let table = document.getElementById("traceTableTruth");
+      let rows = table.rows;
+      
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample1() {
+      let correctValues = [
+        ["02", "", "0", ""],
+        ["03", "1", "", ""],
+        ["05", "", "1", ""],
+        ["06", "2", "", ""],
+        ["05", "", "3", ""],
+        ["06", "3", "", ""],
+        ["05", "", "6", ""],
+        ["06", "4", "", ""],
+        ["05", "", "10", ""],
+        ["06", "5", "", ""],
+        ["05", "", "15", ""],
+        ["06", "6", "", ""],
+        ["08", "", "", "Sum is 15"]
+      ];
+      let table = document.getElementById("traceTableExample1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample2() {
+      let correctValues = [
+        ["02", "", "1", ""],
+        ["03", "2", "", ""],
+        ["05", "", "2", ""],
+        ["06", "4", "", ""],
+        ["05", "", "8", ""],
+        ["06", "6", "", ""],
+        ["05", "", "48", ""],
+        ["06", "8", "", ""],
+        ["05", "", "384", ""],
+        ["06", "10", "", ""],
+        ["08", "", "", "Product is 384"]
+      ];
+      let table = document.getElementById("traceTableExample2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample3() {
+      let correctValues = [
+        ["01", "5", ""],
+        ["03", "", "5"],
+        ["04", "4", ""],
+        ["03", "", "4"],
+        ["04", "3", ""],
+        ["03", "", "3"],
+        ["04", "2", ""],
+        ["03", "", "2"],
+        ["04", "1", ""],
+        ["03", "", "1"],
+        ["04", "0", ""],
+        ["06", "", "Blast off!"]
+      ];
+      let table = document.getElementById("traceTableExample3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample4() {
+      let correctValues = [
+        ["02", "", "0", ""],
+        ["03", "1", "", ""],
+        ["06", "", "1", ""],
+        ["08", "2", "", ""],
+        ["08", "3", "", ""],
+        ["06", "", "4", ""],
+        ["08", "4", "", ""],
+        ["08", "5", "", ""],
+        ["06", "", "9", ""],
+        ["08", "6", "", ""],
+        ["08", "7", "", ""],
+        ["06", "", "16", ""],
+        ["08", "8", "", ""],
+        ["08", "9", "", ""],
+        ["06", "", "25", ""],
+        ["08", "10", "", ""],
+        ["10", "", "", "Sum is 25"]
+      ];
+      let table = document.getElementById("traceTableExample4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample5() {
+      let correctValues = [
+        ["01", "1", "", ""],
+        ["03", "", "1", ""],
+        ["05", "", "", "1"],
+        ["06", "", "2", ""],
+        ["05", "", "", "2"],
+        ["06", "", "3", ""],
+        ["05", "", "", "3"],
+        ["06", "", "4", ""],
+        ["08", "2", "", ""],
+        ["03", "", "1", ""],
+        ["05", "", "", "2"],
+        ["06", "", "2", ""],
+        ["05", "", "", "4"],
+        ["06", "", "3", ""],
+        ["05", "", "", "6"],
+        ["06", "", "4", ""],
+        ["08", "3", "", ""],
+        ["03", "", "1", ""],
+        ["05", "", "", "3"],
+        ["06", "", "2", ""],
+        ["05", "", "", "6"],
+        ["06", "", "3", ""],
+        ["05", "", "", "9"],
+        ["06", "", "4", ""],
+        ["08", "4", "", ""]
+      ];
+      let table = document.getElementById("traceTableExample5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample6() {
+      let correctValues = [
+        ["02", "1", "", "", ""],
+        ["04", "", "1", "", ""],
+        ["07", "", "", "*", ""],
+        ["08", "", "2", "", ""],
+        ["10", "", "", "", "*"],
+        ["11", "2", "", "", ""],
+        ["04", "", "1", "", ""],
+        ["07", "", "", "*", ""],
+        ["08", "", "2", "", ""],
+        ["07", "", "", "**", ""],
+        ["08", "", "3", "", ""],
+        ["10", "", "", "", "**"],
+        ["11", "3", "", "", ""],
+        ["04", "", "1", "", ""],
+        ["07", "", "", "*", ""],
+        ["08", "", "2", "", ""],
+        ["07", "", "", "**", ""],
+        ["08", "", "3", "", ""],
+        ["07", "", "", "***", ""],
+        ["08", "", "4", "", ""],
+        ["10", "", "", "", "***"],
+        ["11", "4", "", "", ""]
+      ];
+      let table = document.getElementById("traceTableExample6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample7() {
+      let correctValues = [
+        ["04", "", "", "", "0"],
+        ["03", "1", "", "", ""],
+        ["06", "", "1", "", ""],
+        ["08", "", "", "1", ""],
+        ["09", "", "", "", "1"],
+        ["10", "", "2", "", ""],
+        ["08", "", "", "2", ""],
+        ["09", "", "", "", "3"],
+        ["10", "", "3", "", ""],
+        ["12", "2", "", "", ""],
+        ["06", "", "1", "", ""],
+        ["08", "", "", "2", ""],
+        ["09", "", "", "", "5"],
+        ["10", "", "2", "", ""],
+        ["08", "", "", "4", ""],
+        ["09", "", "", "", "9"],
+        ["10", "", "3", "", ""],
+        ["12", "3", "", "", ""],
+        ["14", "", "", "", ""],
+        ["", "", "", "", "Total is 9"]
+      ];
+      let table = document.getElementById("traceTableExample7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+    
+    function checkAnswersExample8() {
+      let correctValues = [
+        ["01", "3", "", ""],
+        ["03", "", "3", ""],
+        ["05", "", "", "3"],
+        ["06", "", "2", ""],
+        ["05", "", "", "2"],
+        ["06", "", "1", ""],
+        ["05", "", "", "1"],
+        ["06", "", "0", ""],
+        ["08", "2", "", ""],
+        ["03", "", "2", ""],
+        ["05", "", "", "2"],
+        ["06", "", "1", ""],
+        ["05", "", "", "1"],
+        ["06", "", "0", ""],
+        ["08", "1", "", ""],
+        ["03", "", "1", ""],
+        ["05", "", "", "1"],
+        ["06", "", "0", ""],
+        ["08", "0", "", ""],
+        ["10", "", "", "Done"]
+      ];
+      let table = document.getElementById("traceTableExample8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i - 1];
+         for (let j = 0; j < inputs.length; j++) {
+             inputs[j].style.backgroundColor =
+               (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Passcode Trace Table Challenge -->
+  <section id="passcodeChallenge">
+    <h2>Passcode Trace Table Challenge</h2>
+    <p>
+      Your school locker requires a passcode to open. The correct locker passcode is <strong>J277</strong>.
+      For example, a student first types <strong>Computer</strong>, then <strong>Science</strong>, and finally <strong>J277</strong>.
+      The program then prints the total number of attempts.
+    </p>
+    <pre>
+// First attempt "Computer"
+// Second attempt "Science"
+// Third attempt "J277"
+01 correctcode = "J277"
+02 exit = false
+03 attempts = 0
+04 do
+05    attempts = attempts + 1
+06    password = input("Enter passcode:")
+07    if password == correctcode then 
+08         exit = true
+09    else 
+10         print("Incorrect")
+11    endif
+12 while (exit == false)
+13 print( attempts + " guesses")
+    </pre>
+    <p>Fill in the table below with the correct values for each line.</p>
+    <table id="traceTableTruth">
+      <tr>
+        <th>Line Number</th>
+        <th>attempts</th>
+        <th>password</th>
+        <th>correctcode</th>
+        <th>exit</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersTruth()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 1: Total Marks Calculator -->
+  <section id="example1">
+    <h2>Example 1: Total Marks Calculator</h2>
+    <p>
+      A high school student receives marks in 5 subjects. Use the pseudocode to calculate the total marks.
+    </p>
+    <pre>
+01 n = 5
+02 sum = 0
+03 i = 1
+04 do
+05     sum = sum + i
+06     i = i + 1
+07 while (i <= n)
+08 print("Sum is " + sum)
+    </pre>
+    <p>Record only the steps where a variable’s value changes or output is produced.</p>
+    <table id="traceTableExample1">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>sum</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample1()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 2: Team Jersey Code -->
+  <section id="example2">
+    <h2>Example 2: Team Jersey Code</h2>
+    <p>
+      A high school sports team multiplies the even jersey numbers (from 2 to 8) to generate a lucky team code.
+    </p>
+    <pre>
+01 n = 8
+02 product = 1
+03 i = 2
+04 do
+05     product = product * i
+06     i = i + 2
+07 while (i <= n)
+08 print("Product is " + product)
+    </pre>
+    <p>Record only the changes.</p>
+    <table id="traceTableExample2">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>product</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample2()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 3: Countdown to the School Bell -->
+  <section id="example3">
+    <h2>Example 3: Countdown to the School Bell</h2>
+    <p>
+      Before the school bell rings, a countdown from 5 to 1 is performed.
+    </p>
+    <pre>
+01 i = 5
+02 do
+03     print(i)
+04     i = i - 1
+05 while (i > 0)
+06 print("Blast off!")
+    </pre>
+    <p>Record the changes.</p>
+    <table id="traceTableExample3">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample3()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 4: Math Club Challenge -->
+  <section id="example4">
+    <h2>Example 4: Math Club Challenge</h2>
+    <p>
+      In a math club challenge, a student calculates the sum of odd numbers between 1 and 9.
+    </p>
+    <pre>
+01 n = 9
+02 sum = 0
+03 i = 1
+04 do
+05     if (i mod 2 != 0)
+06         sum = sum + i
+07     endif
+08     i = i + 1
+09 while (i <= n)
+10 print("Sum is " + sum)
+    </pre>
+    <p>Record only the steps where a value changes.</p>
+    <table id="traceTableExample4">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>sum</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample4()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 5: Classroom Multiplication Table -->
+  <section id="example5">
+    <h2>Example 5: Classroom Multiplication Table</h2>
+    <p>
+      A math teacher asks students to generate the multiplication table for numbers 1 to 3.
+    </p>
+    <pre>
+01 i = 1
+02 do
+03     j = 1
+04     do
+05         print(i * j)
+06         j = j + 1
+07     while (j <= 3)
+08     i = i + 1
+09 while (i <= 3)
+    </pre>
+    <p>Record only when values change.</p>
+    <table id="traceTableExample5">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>j</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample5()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 6: Star Pattern for the School Magazine -->
+  <section id="example6">
+    <h2>Example 6: Star Pattern for the School Magazine</h2>
+    <p>
+      To celebrate the football team's wins, a student creates a right triangle star pattern for the school magazine.
+    </p>
+    <pre>
+01 rows = 3
+02 i = 1
+03 do
+04     j = 1
+05     line = ""
+06     do
+07         line = line + "*"
+08         j = j + 1
+09     while (j <= i)
+10     print(line)
+11     i = i + 1
+12 while (i <= rows)
+    </pre>
+    <p>Record only the steps where values change.</p>
+    <table id="traceTableExample6">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>j</th>
+        <th>line</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample6()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 7: Test Score Summation -->
+  <section id="example7">
+    <h2>Example 7: Test Score Summation</h2>
+    <p>
+      A student enters marks for 2 subjects over 2 terms in a grid and calculates the total score.
+    </p>
+    <pre>
+01 rows = 2
+02 cols = 2
+03 i = 1
+04 total = 0
+05 do
+06     j = 1
+07     do
+08         value = i * j
+09         total = total + value
+10         j = j + 1
+11     while (j <= cols)
+12     i = i + 1
+13 while (i <= rows)
+14 print("Total is " + total)
+    </pre>
+    <p>Record only the steps where a value changes.</p>
+    <table id="traceTableExample7">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>j</th>
+        <th>value</th>
+        <th>total</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersExample7()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Example 8: Nested Countdown for the School Dance -->
+  <section id="example8">
+    <h2>Example 8: Nested Countdown for the School Dance</h2>
+    <p>
+      As part of the school dance preparations, a nested countdown is performed.
+    </p>
+    <pre>
+01 i = 3
+02 do
+03     j = i
+04     do
+05         print(j)
+06         j = j - 1
+07     while (j > 0)
+08     i = i - 1
+09 while (i > 0)
+10 print("Done")
+    </pre>
+    <p>Record only the steps where values change.</p>
+    <table id="traceTableExample8">
+      <tr>
+        <th>Line Number</th>
+        <th>i</th>
+        <th>j</th>
+        <th>Output</th>
+      </tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+    <button onclick="checkAnswersExample8()">Check Answers</button>
+  </section>
+  
+</body>
+</html>

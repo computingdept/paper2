@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>File Operations Trace Table Challenges</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #F9F9F9;
+      color: #333;
+      margin: 20px;
+      padding-bottom: 50px;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+      margin-bottom: 50px;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 1px;
+      background: #ddd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      font-size: 1em;
+      overflow-x: auto;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005bb5;
+    }
+  </style>
+  <script>
+    /* Q1: Open a File */
+    function checkAnswersQ1() {
+      // Expected trace:
+      // Row 1 (Line 01): Subprogram called: procedure open("sample.txt")
+      // Row 2 (Line 02): Output: "File sample.txt opened"
+      let correctValues = [
+        ["01", "procedure open(\"sample.txt\")", ""],
+        ["02", "", "File sample.txt opened"]
+      ];
+      let table = document.getElementById("traceTableQ1");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q2: Close a File */
+    function checkAnswersQ2() {
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("sample.txt") called
+      // Row 2 (Line 02): procedure close() called on myFile
+      // Row 3 (Line 03): Output: "File closed"
+      let correctValues = [
+        ["01", "procedure open(\"sample.txt\")", ""],
+        ["02", "procedure close()", ""],
+        ["03", "", "File closed"]
+      ];
+      let table = document.getElementById("traceTableQ2");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++) {
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++) {
+           inputs[j].style.backgroundColor =
+             (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q3: Read a Line from a File */
+    function checkAnswersQ3() {
+      // Assume sample.txt's first line is "Hello, world!"
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("sample.txt") called
+      // Row 2 (Line 02): function readLine() called, returns "Hello, world!"
+      // Row 3 (Line 03): Output: "Hello, world!"
+      let correctValues = [
+        ["01", "procedure open(\"sample.txt\")", ""],
+        ["02", "function readLine()", "line = Hello, world!"],
+        ["03", "", "Hello, world!"]
+      ];
+      let table = document.getElementById("traceTableQ3");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q4: Write a Line to a File */
+    function checkAnswersQ4() {
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("sample.txt") called
+      // Row 2 (Line 02): procedure writeLine("Add new line") called
+      // Row 3 (Line 03): Output: "Line added"
+      let correctValues = [
+        ["01", "procedure open(\"sample.txt\")", ""],
+        ["02", "procedure writeLine(\"Add new line\")", ""],
+        ["03", "", "Line added"]
+      ];
+      let table = document.getElementById("traceTableQ4");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q5: Read File Until End */
+    function checkAnswersQ5() {
+      // Assume sample.txt contains three lines: "First", "Second", "Third"
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("sample.txt") called
+      // Row 2 (Line 02): while NOT endOfFile() condition true
+      // Row 3 (Line 03): function readLine() called, returns "First"
+      // Row 4 (Line 03): function readLine() called, returns "Second"
+      // Row 5 (Line 03): function readLine() called, returns "Third"
+      // Row 6 (Line 04): Loop ends; Output: "First", "Second", "Third" printed sequentially
+      let correctValues = [
+        ["01", "procedure open(\"sample.txt\")", ""],
+        ["02", "while NOT endOfFile()", ""],
+        ["03", "function readLine()", "First"],
+        ["03", "function readLine()", "Second"],
+        ["03", "function readLine()", "Third"],
+        ["04", "", "End of file reached"]
+      ];
+      let table = document.getElementById("traceTableQ5");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q6: Create a New File */
+    function checkAnswersQ6() {
+      // Expected trace:
+      // Row 1 (Line 01): function newFile("myText.txt") called
+      // Row 2 (Line 02): procedure open("myText.txt") called
+      // Row 3 (Line 03): Output: "New file myText.txt created and opened"
+      let correctValues = [
+        ["01", "function newFile(\"myText.txt\")", ""],
+        ["02", "procedure open(\"myText.txt\")", ""],
+        ["03", "", "New file myText.txt created and opened"]
+      ];
+      let table = document.getElementById("traceTableQ6");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q7: Append a Line to an Existing File */
+    function checkAnswersQ7() {
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("sample.txt") called
+      // Row 2 (Line 02): procedure writeLine("Appended line") called
+      // Row 3 (Line 03): Output: "Line appended"
+      let correctValues = [
+        ["01", "procedure open(\"sample.txt\")", ""],
+        ["02", "procedure writeLine(\"Appended line\")", ""],
+        ["03", "", "Line appended"]
+      ];
+      let table = document.getElementById("traceTableQ7");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q8: Overwrite File Content */
+    function checkAnswersQ8() {
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("announcement.txt") called
+      // Row 2 (Line 02): procedure writeLine("Exam postponed") called
+      // Row 3 (Line 03): procedure close() called
+      // Row 4 (Line 04): Output: "Announcement updated"
+      let correctValues = [
+        ["01", "procedure open(\"announcement.txt\")", ""],
+        ["02", "procedure writeLine(\"Exam postponed\")", ""],
+        ["03", "procedure close()", ""],
+        ["04", "", "Announcement updated"]
+      ];
+      let table = document.getElementById("traceTableQ8");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q9: Read All Lines from a File */
+    function checkAnswersQ9() {
+      // Assume diary.txt contains two lines: "Day1" and "Day2"
+      // Expected trace:
+      // Row 1 (Line 01): procedure open("diary.txt") called
+      // Row 2 (Line 02): while NOT endOfFile() condition true
+      // Row 3 (Line 03): function readLine() called, returns "Day1"
+      // Row 4 (Line 04): Output: "Entry: Day1"
+      // Row 5 (Line 03): function readLine() called, returns "Day2"
+      // Row 6 (Line 04): Output: "Entry: Day2"
+      // Row 7 (Line 05): Loop ends; Output: "Diary entries completed"
+      let correctValues = [
+        ["01", "procedure open(\"diary.txt\")", ""],
+        ["02", "while NOT endOfFile()", ""],
+        ["03", "function readLine()", "Day1"],
+        ["04", "", "Entry: Day1"],
+        ["03", "function readLine()", "Day2"],
+        ["04", "", "Entry: Day2"],
+        ["05", "", "Diary entries completed"]
+      ];
+      let table = document.getElementById("traceTableQ9");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+
+    /* Q10: Combined File Operations */
+    function checkAnswersQ10() {
+      // Expected trace:
+      // Row 1 (Line 01): function newFile("diary.txt") called
+      // Row 2 (Line 02): procedure open("diary.txt") called
+      // Row 3 (Line 03): procedure writeLine("Today was brilliant!") called
+      // Row 4 (Line 04): procedure close() called
+      // Row 5 (Line 05): procedure open("diary.txt") called
+      // Row 6 (Line 06): function readLine() called, returns "Today was brilliant!"
+      // Row 7 (Line 07): Output: "Diary: Today was brilliant!"
+      let correctValues = [
+        ["01", "function newFile(\"diary.txt\")", ""],
+        ["02", "procedure open(\"diary.txt\")", ""],
+        ["03", "procedure writeLine(\"Today was brilliant!\")", ""],
+        ["04", "procedure close()", ""],
+        ["05", "procedure open(\"diary.txt\")", ""],
+        ["06", "function readLine()", "Today was brilliant!"],
+        ["07", "", "Diary: Today was brilliant!"]
+      ];
+      let table = document.getElementById("traceTableQ10");
+      let rows = table.rows;
+      for (let i = 1; i < rows.length; i++){
+         let inputs = rows[i].getElementsByTagName("input");
+         let correct = correctValues[i-1];
+         for (let j = 0; j < inputs.length; j++){
+            inputs[j].style.backgroundColor =
+              (inputs[j].value.trim() === correct[j]) ? "lightgreen" : "lightcoral";
+         }
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>File Operations Trace Table Challenges</h1>
+  <p>
+    These 10 challenges involve file operations such as opening, closing, reading from, and writing to files.
+    Each challenge includes pseudocode with explicit line numbers. In the trace tables, enter the file operation
+    (prefixed with "procedure" or "function" as needed) along with any parameters, and record the output produced.
+  </p>
+  
+  <hr>
+  
+  <!-- Q1: Open a File -->
+  <section id="q1">
+    <h2>Q1: Open a File</h2>
+    <p><strong>Scenario:</strong> A student needs to open a text file named "sample.txt" to review its contents.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("sample.txt")
+02 print("File sample.txt opened")
+    </pre>
+    <table id="traceTableQ1">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ1()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q2: Close a File -->
+  <section id="q2">
+    <h2>Q2: Close a File</h2>
+    <p><strong>Scenario:</strong> After reviewing the file, the student closes "sample.txt".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("sample.txt")
+02 myFile.close()
+03 print("File closed")
+    </pre>
+    <table id="traceTableQ2">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ2()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q3: Read a Line from a File -->
+  <section id="q3">
+    <h2>Q3: Read a Line from a File</h2>
+    <p><strong>Scenario:</strong> The file "sample.txt" contains the line "Hello, world!". The student reads this first line.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("sample.txt")
+02 line = myFile.readLine()
+03 print(line)
+    </pre>
+    <table id="traceTableQ3">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ3()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q4: Write a Line to a File -->
+  <section id="q4">
+    <h2>Q4: Write a Line to a File</h2>
+    <p><strong>Scenario:</strong> The student appends the line "Add new line" to "sample.txt".</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("sample.txt")
+02 myFile.writeLine("Add new line")
+03 print("Line added")
+    </pre>
+    <table id="traceTableQ4">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ4()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q5: Read File Until End -->
+  <section id="q5">
+    <h2>Q5: Read File Until End</h2>
+    <p><strong>Scenario:</strong> The file "sample.txt" contains three lines: "First", "Second", and "Third". The program reads and prints each line until the end of the file.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("sample.txt")
+02 while NOT myFile.endOfFile()
+03     print(myFile.readLine())
+04 endwhile
+    </pre>
+    <table id="traceTableQ5">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ5()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q6: Create a New File -->
+  <section id="q6">
+    <h2>Q6: Create a New File</h2>
+    <p><strong>Scenario:</strong> A student creates a new diary file named "myText.txt" and opens it for writing.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 newFile("myText.txt")
+02 myFile = open("myText.txt")
+03 print("New file myText.txt created and opened")
+    </pre>
+    <table id="traceTableQ6">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ6()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q7: Append a Line to an Existing File -->
+  <section id="q7">
+    <h2>Q7: Append a Line to an Existing File</h2>
+    <p><strong>Scenario:</strong> A student opens "sample.txt" and appends the line "Appended line" at the end.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("sample.txt")
+02 myFile.writeLine("Appended line")
+03 print("Line appended")
+    </pre>
+    <table id="traceTableQ7">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ7()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q8: Overwrite File Content -->
+  <section id="q8">
+    <h2>Q8: Overwrite File Content</h2>
+    <p><strong>Scenario:</strong> A teacher updates the announcement in "announcement.txt" by writing a new message and then closes the file.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("announcement.txt")
+02 myFile.writeLine("Exam postponed")
+03 myFile.close()
+04 print("Announcement updated")
+    </pre>
+    <table id="traceTableQ8">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ8()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q9: Read All Lines from a File -->
+  <section id="q9">
+    <h2>Q9: Read All Lines from a File</h2>
+    <p><strong>Scenario:</strong> A diary file "diary.txt" contains two entries: "Day1" and "Day2". The program reads each entry and prints it with a label.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 myFile = open("diary.txt")
+02 while NOT myFile.endOfFile()
+03     line = myFile.readLine()
+04     print("Entry: " + line)
+05 endwhile
+    </pre>
+    <table id="traceTableQ9">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ9()">Check Answers</button>
+  </section>
+  
+  <hr>
+  
+  <!-- Q10: Combined File Operations -->
+  <section id="q10">
+    <h2>Q10: Combined File Operations</h2>
+    <p><strong>Scenario:</strong> A student creates a new diary file "diary.txt", writes an entry "Today was brilliant!", closes the file, then reopens it to read and display the entry.</p>
+    <p><strong>Pseudocode:</strong></p>
+    <pre>
+01 newFile("diary.txt")
+02 myFile = open("diary.txt")
+03 myFile.writeLine("Today was brilliant!")
+04 myFile.close()
+05 myFile = open("diary.txt")
+06 entry = myFile.readLine()
+07 print("Diary: " + entry)
+    </pre>
+    <table id="traceTableQ10">
+      <tr>
+        <th>Line Number</th>
+        <th>Subprogram (Procedure/Function) called</th>
+        <th>Return/Value</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+    <button onclick="checkAnswersQ10()">Check Answers</button>
+  </section>
+  
+</body>
+</html>
